@@ -1,7 +1,7 @@
 ---
 doc_id: HTRL
 title: Quy định về việc đánh giá kết quả rèn luyện của sinh viên đại học hệ chính quy tại Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh
-version: 2021-2022
+version: 2024-2025
 owner: Trường Đại học Sư phạm Kỹ thuật Thành phố Hồ Chí Minh (Phòng Tuyển sinh và Công tác SV)
 ---
 

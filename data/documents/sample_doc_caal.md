@@ -1,7 +1,7 @@
 ---
 doc_id: CA101
 title: Kiến trúc máy tính và hợp ngữ
-version: 2026-09-01
+version: 2026-09-02
 owner: Bộ môn Kỹ thuật máy tính
 ---
 
