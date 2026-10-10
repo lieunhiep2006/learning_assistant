@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "learning-assistant"
+version = "0.1.0"
+description = "A learning assistant AI project"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]<2",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
