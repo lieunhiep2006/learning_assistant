@@ -1,82 +1,62 @@
-
+# client_test.py
 import asyncio
+import json
 import os
-import sys
+from dotenv import load_dotenv
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
+from src.agent.agent import StudyAgent
 
-async def main():
-    # Khai báo cách chạy MCP Server
+load_dotenv()
+
+
+async def run_e2e_test():
     server_params = StdioServerParameters(
-        command=sys.executable,
-        args=["src/mcp/server.py"],
+        command="uv",
+        args=["run", "python", "-m", "src.mcp.server"],
         env=os.environ.copy(),
     )
 
-    # Mở kết nối stdio giữa client và server
+    print("=== KHỞI CHẠY KIỂM THỬ END-TO-END (E2E) SV2 ===")
+
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
-            # Khởi tạo phiên MCP
             await session.initialize()
+            agent = StudyAgent(mcp_session=session)
 
-            # Tự động khám phá các tool do server công bố
-            result = await session.list_tools()
+            # -------------------------------------------------------------
+            # TEST 1: Truy vấn tra cứu RAG / Knowledge
+            # -------------------------------------------------------------
+            print("\n--- Test 1: Tra cứu thông tin môn học (RAG) ---")
+            query_1 = "Kế hoạch môn học HTRL gồm những nội dung gì?"
+            print(f"User Query: {query_1}")
+            res_1 = await agent.ask(query_1)
+            print(f"Agent Response:\n{res_1}")
 
-            print("=== DANH SÁCH TOOL ===")
-            for tool in result.tools:
-                print(f"- {tool.name}: {tool.description}")
-
-            print(f"\nTổng số tool: {len(result.tools)}")
-
-            # Gọi tool search_lessons
-            result = await session.call_tool(
-                "search_lessons",
-                {"query": "đánh giá kết quả rèn luyện sinh viên"},
+            # -------------------------------------------------------------
+            # TEST 2: Action Write & Read-back Verification (Thành công)
+            # -------------------------------------------------------------
+            print("\n--- Test 2: Tạo Study Request + Read-Back Verification ---")
+            query_2 = (
+                "Tôi là sinh viên mã SV2026, cần hỗ trợ gấp về phần hàm đệ quy trong môn CS101."
             )
+            print(f"User Query: {query_2}")
+            res_2 = await agent.ask(query_2)
+            print(f"Agent Response:\n{res_2}")
 
-            print("\n=== KẾT QUẢ SEARCH ===")
-            for item in result.content:
-                if hasattr(item, "text"):
-                    print(item.text)
+            # -------------------------------------------------------------
+            # TEST 3: Đảm bảo Guardrail khi thiếu student_id
+            # -------------------------------------------------------------
+            print("\n--- Test 3: Tạo Request nhưng CHƯA đưa student_id ---")
+            query_3 = "Tạo giúp tôi một yêu cầu hỗ trợ môn CS102 về mảng 2 chiều."
+            print(f"User Query: {query_3}")
+            res_3 = await agent.ask(query_3)
+            print(f"Agent Response:\n{res_3}")
 
-
-            result = await session.call_tool(
-                "get_course_plan",
-                {"course_id": "CA101"},
-)
-
-            print("\n=== KẾT QUẢ COURSE PLAN ===")
-            for item in result.content:
-                if hasattr(item, "text"):
-                    print(item.text)
-
-
-            result = await session.call_tool(
-                "create_study_request",
-                {
-                "student_id": "SV001",
-                "course_id": "CA101",
-                "request_content": "Tôi cần hỗ trợ ôn tập tuần 1",
-    },
-)
-
-            print("\n=== KẾT QUẢ TẠO YÊU CẦU ===")
-            for item in result.content:
-                if hasattr(item, "text"):
-                    print(item.text)
-
-            result = await session.call_tool(
-                "get_study_request",
-                {"request_id": "REQ0001"},
-)
-
-            print("\n=== KẾT QUẢ ĐỌC LẠI YÊU CẦU ===")
-            for item in result.content:
-                if hasattr(item, "text"):
-                    print(item.text)
+    print("\n=== HOÀN THÀNH KIỂM THỬ E2E ===")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run_e2e_test())
