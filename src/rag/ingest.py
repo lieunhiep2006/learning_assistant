@@ -1,46 +1,21 @@
 from pathlib import Path
 from src.corpus.metadata import Document,DocumentChunk
 from src.corpus.doc_store import DocumentStore
-from chunking import chunk_recursive
-def create_chunks(document: Document, chunk_size: int =200,overlap:int =40,)->list[DocumentChunk]:
-    text_chunks=chunk_recursive(
-        document.content,
-        chunk_size=chunk_size
-    )
-    return[
-        DocumentChunk(
-            content=text,
-            doc_id=document.doc_id,
-            chunk_id=f"{document.doc_id}_chunk_{index}",
-            chunk_index=index,
-            metadata={
-                "strategy": "recursive",
-                "chunk_size": chunk_size,
-            },
+from src.rag.chunking import chunk_document,create_chunks_documents
+def create_chunks(document: Document, strategy: str="headings",chunk_size: int =700,overlap:int =40,)->list[DocumentChunk]:
+    if strategy == "headings":
+        return create_chunks_documents(
+            document,
+            chunk_size=chunk_size,
         )
-        for index, text in enumerate(text_chunks)
-    ]
-
-def load_documents(strategy: str="fixed", chunk_size: int=200, overlap:int =40,)->DocumentStore:
-    file_path=__path__(Path(__file__).root/"data"/"documents")
-    text=file_path.read_text(encoding="utf-8")
-    document=Document(content=text,title="Sample Document", source=str(file_path),)
-    store=DocumentStore()
-    store.add(document)
-    chunks=create_chunks(document=document,chunk_size=chunk_size)
-    for chunk in chunks:store.add_chunk(chunk)
-    lengths=[len(chunk.content) for chunk in store.get_chunks_by_doc(document.doc_id)]
-    print("Title: ", document.title)
-    print("Source: ", document.source)
-    print("Chunk size: ", chunk_size)
-    print("Documents:", store.count()["documents"])
-    print("Chunks:", store.count()["chunks"])
-    if lengths:
-        print("Minimum chunk length:", min(lengths))
-        print("Maximum chunk length:", max(lengths))
-        print("Average chunk length:", sum(lengths) / len(lengths))
-        print("Total characters:", sum(lengths))
-    return store
+    
+    if strategy == "fixed":
+        return chunk_document(
+            document,
+            chunk_size=chunk_size,
+            overlap=overlap,
+        )
+    raise ValueError(f"unknown chunking strategy: {strategy}")
 
 def file_document(file_path:Path) -> Document:
     project_root=Path(__file__).resolve().parents[2]
@@ -91,3 +66,27 @@ def file_document(file_path:Path) -> Document:
         owner=header["owner"],
         source=file_path.relative_to(project_root).as_posix(),
     )
+
+def ingest_documents(source_dir:Path,output_path:Path,strategy:str="headings",chunk_size:int=700,overlap:int=40)->DocumentStore:
+    md_files=sorted(source_dir.rglob("*.md"))
+    if not md_files:
+        raise FileNotFoundError(f"No markdown files in {source_dir}")
+
+    store=DocumentStore()
+    for file_path in md_files:
+        document=file_document(file_path)
+        store.add(document)
+        for chunk in create_chunks(document,strategy=strategy,chunk_size=chunk_size,overlap=overlap):
+            store.add_chunk(chunk)
+    store.save(str(output_path))
+    return store
+def main()->None:
+    project_root=Path(__file__).resolve().parents[2]
+    source_dir=project_root/ "data"/ "documents"
+    output_path=project_root/ "data"/ "documents"/"document_store.json"
+    store=ingest_documents(source_dir,output_path)
+    print(f"Documents: {store.count()['documents']}")
+    print(f"Chunks: {store.count()['chunks']}")
+    print(f"Saved to: {output_path}")
+if __name__=="__main__":
+    main()
