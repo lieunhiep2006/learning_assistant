@@ -4,9 +4,12 @@ from src.corpus.metadata import DocumentChunk
 from src.rag.retrieval_types import RetrievalResult
 
 def tokenize(text:str)->list[str]:
-    normalized=unicodedata.normalize("NFC", text)
-    normalized_lower=normalized.lower()
-    return re.findall(r"[^\W_]+", normalized_lower, flags=re.UNICODE)
+    normalized=unicodedata.normalize("NFD", text.casefold())
+    folded="".join(
+        char for char in normalized.replace("đ","d")
+        if unicodedata.category(char) != "Mn"
+        )
+    return re.findall(r"[^\W_]+", folded, flags=re.UNICODE)
 
 def build_bm25_index(chunks: list[DocumentChunk]) -> BM25Okapi:
     tokenized = [tokenize(chunk.content) for chunk in chunks]
