@@ -37,12 +37,6 @@ def embed_chunks(
         embeddings.extend(item.embedding for item in items)
     return embeddings
 
-def batch_embed_text(input:list[str],model="jina-embeddings-v3",api_key=None)->list[list[float]]:
-    if api_key is None:
-        api_key=os.getenv("JINA_API_KEY")
-    resp=jina_embeddings(input=input, model=model, api_key=api_key)
-    return [item.embedding for item in resp.data]
-
 def cosine_similarity(a:list[float],b:list[float])->float:
     return np.dot(a,b) / (np.linalg.norm(a)*np.linalg.norm(b))
 
