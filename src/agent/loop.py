@@ -1,7 +1,7 @@
 import json
 from jsonschema import validate, ValidationError
 from src.agent.parser import parse_reply
-from src.agent.jsonl_logger import JSONLLogger
+from src.evaluation.logger import JSONLLogger
 
 # Khởi tạo JSONL Logger để tự động lưu trace chạy thật vào logs/
 jsonl_logger = JSONLLogger()
