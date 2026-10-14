@@ -8,7 +8,7 @@ from src.tools.search_lessons import search_lessons
 
 RAG_SYSTEM_PROMPT=(Path(__file__).resolve().parents[2]/"prompts"/"rag_system.txt")
 MODEL = "qwen/qwen3.8-27b"
-NO_ANSWER= "Tài liệu không có đủ thông tin để trả lời"
+NO_ANSWER= "Not enough information to answer that"
 def build_rag_prompt()->str:
     prompt=RAG_SYSTEM_PROMPT.read_text(encoding="utf-8").strip()
     if not prompt:
@@ -48,7 +48,7 @@ async def main()->None:
         result=await answer_question(
             client=client,
             retrieval=retrieval,
-            question="Thanh ghi RSP dùng để làm gì?",
+            question="Which chunking strategy is best for most production RAG systems, and in the before/after evaluation example what happened to context precision after chunk size went from 150 to 300 with hybrid search and top_k 5?",
             mode="hybrid",
         )
     print("Answer:",result["answer"])
