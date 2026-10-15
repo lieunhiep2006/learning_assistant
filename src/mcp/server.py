@@ -5,12 +5,28 @@ import json
 from datetime import datetime
 
 from mcp.server.fastmcp import FastMCP
+from src.rag.retriever import build_retriever
+from src.tools.search_lessons import search_lessons as rag_search_lessons
+from src.tools.get_course_plan import get_course_plan as find_course_plan
+from src.tools.create_study_request import (
+    create_study_request as save_study_request,
+)
+from src.tools.get_study_request import get_study_request as find_study_request
 
 # Khởi tạo MCP Server
 mcp = FastMCP("Learning Assistant")
 
 # Xác định thư mục chứa tài liệu
-DOCUMENT_DIR = Path(__file__).resolve().parents[2] / "data" / "documents"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+DOCUMENT_DIR = PROJECT_ROOT / "data" / "documents"
+STORE_PATH = DOCUMENT_DIR / "document_store.json"
+
+# Khởi tạo RAG context một lần khi MCP Server khởi động
+retrieval_context = build_retriever(
+    store_path=STORE_PATH,
+    model="jina-embeddings-v3",
+)
 
 
 def read_documents():
@@ -36,50 +52,26 @@ def read_documents():
     return documents
 
 
+
 @mcp.tool()
 def search_lessons(query: str) -> str:
-     """Tìm kiếm nội dung liên quan trong các tài liệu Markdown."""
+    """Tìm kiếm bài học bằng Hybrid RAG của SV1."""
 
-     if not query.strip():
-         return "Vui lòng nhập nội dung cần tìm !"
+    if not query.strip():
+        return json.dumps({
+            "status": "no_answer",
+            "context": "",
+            "sources": [],
+        }, ensure_ascii=False)
 
-     documents = read_documents()
-     keywords = query.lower().split()
-     results = []
+    result = rag_search_lessons(
+        context=retrieval_context,
+        query=query,
+        top_k=3,
+        mode="hybrid",
+    )
 
-     for document in documents:
-        lines = document["content"].splitlines()
-
-        for index, line in enumerate(lines):
-            if not line.strip():
-                continue
-
-            line_lower = line.lower()
-            score = sum(1 for word in keywords if word in line_lower)
-
-            if score > 0:
-                results.append({
-                    "score": score,
-                    "title": document["title"],
-                    "filename": document["filename"],
-                    "line": line.strip()
-                })
-
-     results.sort(key=lambda item: item["score"], reverse=True)
-
-     if not results:
-         return "Không tìm thấy nội dung phù hợp trong tài liệu hiện có."
-
-     output = ["Kết quả tìm kiếm được"]
-
-     for result in results[:5]:
-         output.append(
-             f"- Tài liệu: {result['title']}\n"
-             f"  Nguồn: {result['filename']}\n"
-             f"  Nội dung: {result['line']}"
-         )
-
-     return "\n".join(output)
+    return json.dumps(result, ensure_ascii=False)
 
 
 
@@ -87,23 +79,12 @@ def search_lessons(query: str) -> str:
 def get_course_plan(course_id: str) -> str:
     """Lấy nội dung kế hoạch môn học theo mã tài liệu."""
 
-    if not course_id.strip():
-        return "Vui lòng nhập mã môn học hoặc mã tài liệu."
+    result = find_course_plan(
+        context=retrieval_context,
+        course_id=course_id,
+    )
 
-    documents = read_documents()
-
-    for document in documents:
-        for line in document["content"].splitlines():
-            if line.startswith("doc_id:"):
-                doc_id = line.split(":", 1)[1].strip()
-                if doc_id.lower() == course_id.strip().lower():
-                    return(
-                        f"Tiêu đề: {document['title']}\n"
-                        f"Mã tài liệu: {doc_id}\n"
-                        f"Nguồn: {document['filename']}\n\n"
-                        f"{document['content'][:4000]}")
-
-    return f"Không tìm thấy tài liệu có mã: {course_id}"
+    return json.dumps(result, ensure_ascii=False)
 
 
 
@@ -116,6 +97,7 @@ REQUEST_FILE = (
 )
 
 
+
 @mcp.tool()
 def create_study_request(
     student_id: str,
@@ -124,79 +106,19 @@ def create_study_request(
 ) -> str:
     """Tạo và lưu yêu cầu hỗ trợ học tập của sinh viên."""
 
-    if not student_id.strip():
-        return "Vui lòng nhập mã sinh viên."
-    
-    if not course_id.strip():
-        return "Vui lòng nhập mã khóa học."
-
-    if not request_content.strip():
-        return "Vui lòng nhập nội dung."
-
-    requests = []
-
-    if REQUEST_FILE.exists():
-        requests = json.loads(
-            REQUEST_FILE.read_text(encoding="utf-8")
-        )
-
-    request_id = f"REQ{len(requests) + 1:04d}"
-
-    new_request = {
-        "request_id": request_id,
-        "student_id": student_id.strip(),
-        "course_id": course_id.strip(),
-        "request_content": request_content.strip(),
-        "created_at": datetime.now().isoformat(timespec="seconds"),
-        "status": "pending"
-    }
-
-    requests.append(new_request)
-
-    REQUEST_FILE.parent.mkdir(parents=True, exist_ok=True)
-
-    REQUEST_FILE.write_text(
-        json.dumps(requests, ensure_ascii=False, indent=2),
-        encoding="utf-8",
+    result = save_study_request(
+        student_id=student_id,
+        course_id=course_id,
+        request_content=request_content,
     )
 
-    return json.dumps({
-    "success": True,
-    "action": "create_study_request",
-    "data": new_request,
-    "error": None
-    }, ensure_ascii=False)
+    return json.dumps(result, ensure_ascii=False)
 
 
 @mcp.tool()
 def get_study_request(request_id: str) -> str:
-    """Lấy thông tin yêu cầu học tập theo mã yêu cầu."""
-
-    if not request_id.strip():
-        return "Vui lòng nhập mã yêu cầu."
-
-    if not REQUEST_FILE.exists():
-        return "Chưa có yêu cầu học tập nào được lưu."
-
-    requests = json.loads(
-        REQUEST_FILE.read_text(encoding="utf-8")
-    )
-
-    for request in requests:
-        if request["request_id"].lower() == request_id.strip().lower():
-            return json.dumps({
-                "success": True,
-                "action" : "get_study_request",
-                "data": request,
-                "error":None
-            }, ensure_ascii=False)
-
-    return json.dumps({
-                    "success": False,
-                    "action" : "get_study_request",
-                    "data": None,
-                    "error": "Không tìm thấy yêu cầu có mã: {request_id}"
-                }, ensure_ascii=False)
+    result = find_study_request(request_id=request_id)
+    return json.dumps(result, ensure_ascii=False)
 
     
 if __name__ == "__main__":

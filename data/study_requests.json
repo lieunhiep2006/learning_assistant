@@ -38,5 +38,29 @@
     "request_content": "Cần hỗ trợ gấp về phần hàm đệ quy (recursive functions) trong môn CS101.",
     "created_at": "2026-10-11T15:21:55",
     "status": "pending"
+  },
+  {
+    "request_id": "REQ0006",
+    "student_id": "SV001",
+    "course_id": "AIPY_W1",
+    "request_content": "Hỗ trợ ôn tập bài Python cơ bản.",
+    "created_at": "2026-10-16T01:33:16",
+    "status": "pending"
+  },
+  {
+    "request_id": "REQ0007",
+    "student_id": "SV001",
+    "course_id": "AIPY_W1",
+    "request_content": "Hỗ trợ ôn tập bài Python cơ bản.",
+    "created_at": "2026-10-16T01:34:33",
+    "status": "pending"
+  },
+  {
+    "request_id": "REQ0008",
+    "student_id": "SV001",
+    "course_id": "AIPY_W1",
+    "request_content": "Hỗ trợ ôn tập bài Python cơ bản.",
+    "created_at": "2026-10-16T01:35:03",
+    "status": "pending"
   }
 ]
