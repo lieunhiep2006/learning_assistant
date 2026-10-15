@@ -147,10 +147,7 @@ def create_chunks_documents(doc:Any,chunk_size:int=700)->list[DocumentChunk]:
     global_index=0
     for section in sections:
         heading_path=section["path"]
-        if doc.doc_id=="HTRL" and heading_path:
-            content_path=["HTRL", *heading_path[1:]]
-        else:
-            content_path=heading_path
+        content_path=heading_path
         section_text=section["text"]
         
         for piece in chunk_recursive(section_text,chunk_size=chunk_size):
