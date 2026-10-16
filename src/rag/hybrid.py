@@ -9,7 +9,7 @@ def normalise_scores(scores: list[float]) -> list[float]:
     min_s = min(scores)
     max_s = max(scores)
     if max_s == min_s:
-        return [1.0] * len(scores)  # All equal → all 1.0
+        return [0.0] * len(scores)
     return [(s - min_s) / (max_s - min_s) for s in scores]
 
 def hybrid_search(
