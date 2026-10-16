@@ -1,131 +1,172 @@
 
-from pathlib import Path
 import json
+import re
 from datetime import datetime
+from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
-from src.tools.search_lessons import search_lessons as rag_search_lessons
 from src.rag.retriever import build_retriever
+from src.tools.search_lessons import search_lessons as rag_search_lessons
+from src.tools.get_course_plan import get_course_plan as find_course_plan
+from src.tools.create_study_request import (
+    create_study_request as save_study_request,
+)
+from src.tools.get_study_request import get_study_request as find_study_request
+
 
 # Khởi tạo MCP Server
 mcp = FastMCP("Learning Assistant")
 
-STORE_PATH = Path(__file__).resolve().parents[2] / "data"/ "documents" / "document_store.json"
-RAG_CONTEXT = build_retriever(store_path=STORE_PATH)
-@mcp.tool()
-def search_lessons(query: str, top_k: int = 3, mode: str = "hybrid") -> str:
-    """Tìm kiếm nội dung bài giảng liên quan trong hệ thống bằng RAG."""
+# Xác định thư mục gốc của dự án
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DOCUMENT_DIR = PROJECT_ROOT / "data" / "documents"
+STORE_PATH = DOCUMENT_DIR / "document_store.json"
+REQUEST_FILE = PROJECT_ROOT / "data" / "study_requests.json"
 
-    if not query.strip():
-        return json.dumps({
-            "success": False,
-            "action": "search_lessons",
-            "data": None,
-            "error": "Vui lòng nhập nội dung cần tìm."
-        }, ensure_ascii=False)
+# Khởi tạo RAG context một lần khi server khởi động
+retrieval_context = build_retriever(
+    store_path=STORE_PATH,
+    model="jina-embeddings-v3",
+)
 
-    try:
-        # Gọi hàm RAG từ src/tools/search_lesson.py
-        result = rag_search_lessons(
-            context=RAG_CONTEXT,
-            query=query,
-            top_k=top_k,
-            mode=mode
+
+def json_result(
+    success: bool,
+    action: str,
+    data=None,
+    error=None,
+) -> str:
+    """Tạo kết quả JSON thống nhất cho MCP tools."""
+    return json.dumps(
+        {
+            "success": success,
+            "action": action,
+            "data": data,
+            "error": error,
+        },
+        ensure_ascii=False,
+    )
+
+
+def read_documents():
+    """Đọc nội dung các file Markdown trong thư mục tài liệu."""
+    documents = []
+
+    if not DOCUMENT_DIR.exists():
+        return documents
+
+    for file_path in DOCUMENT_DIR.glob("*.md"):
+        content = file_path.read_text(encoding="utf-8")
+
+        title_match = re.search(
+            r"(?m)^title:\s*(.+)$",
+            content,
+        )
+        title = (
+            title_match.group(1).strip()
+            if title_match
+            else file_path.stem
         )
 
-        if result["status"] == "no_answer":
-            return json.dumps({
-                "success": False,
-                "action": "search_lessons",
-                "data": {
-                    "context": "",
-                    "sources": []
-                },
-                "error": "Không tìm thấy thông tin phù hợp trong tài liệu bài giảng."
-            }, ensure_ascii=False)
+        documents.append(
+            {
+                "filename": file_path.name,
+                "title": title,
+                "content": content,
+            }
+        )
 
-        return json.dumps({
-            "success": True,
-            "action": "search_lessons",
-            "data": {
-                "context": result["context"],
-                "sources": [
-                    {
-                        "doc_id": getattr(src, "doc_id", ""),
-                        "heading": getattr(src, "heading", ""),
-                        "filename": getattr(src, "filename", "")
-                    } if hasattr(src, "__dict__") else src
-                    for src in result["sources"]
-                ]
+    return documents
+
+
+@mcp.tool()
+def search_lessons(
+    query: str,
+    top_k: int = 3,
+    mode: str = "hybrid",
+) -> str:
+    """Tìm kiếm nội dung bài giảng bằng RAG."""
+
+    if not query.strip():
+        return json_result(
+            False,
+            "search_lessons",
+            error="Vui lòng nhập nội dung cần tìm.",
+        )
+
+    try:
+        result = rag_search_lessons(
+            context=retrieval_context,
+            query=query,
+            top_k=top_k,
+            mode=mode,
+        )
+
+        # Chuẩn hóa kết quả theo giao diện mà evaluation runner sử dụng
+        if not result.get("success", False):
+            return json_result(
+                False,
+                "search_lessons",
+                data=result.get("data"),
+                error=result.get("error") or "Không tìm thấy nội dung phù hợp.",
+            )
+
+        data = result.get("data") or {}
+
+        return json_result(
+            True,
+            "search_lessons",
+            data={
+                "context": data.get("context", ""),
+                "sources": data.get("sources", []),
             },
-            "error": None
-        }, ensure_ascii=False)
+        )
 
-    except Exception as e:
-        return json.dumps({
-            "success": False,
-            "action": "search_lessons",
-            "data": None,
-            "error": f"Lỗi trong quá trình RAG retrieval: {str(e)}"
-        }, ensure_ascii=False)
+    except Exception as exc:
+        return json_result(
+            False,
+            "search_lessons",
+            error=f"Lỗi trong quá trình truy xuất RAG: {exc}",
+        )
+
 
 @mcp.tool()
 def get_course_plan(doc_id: str) -> str:
-    """Lấy toàn bộ tài liệu theo mã doc_id chính xác."""
+    """Lấy toàn bộ tài liệu theo mã doc_id."""
 
-    target_id = doc_id.strip().casefold()
-    if not target_id:
-        return json.dumps({
-            "success": False,
-            "action": "get_course_plan",
-            "data": None,
-            "error": "Vui lòng nhập mã tài liệu (doc_id)."
-        }, ensure_ascii=False)
-
-    documents = RAG_CONTEXT.store.list_all()
-    matched_doc = next(
-        (
-            document
-            for document in documents
-            if document.doc_id.casefold() == target_id
-        ),
-        None,
-    )
-
-    if matched_doc is None:
-        available_doc_ids = sorted(
-            document.doc_id for document in documents
+    if not doc_id.strip():
+        return json_result(
+            False,
+            "get_course_plan",
+            error="Vui lòng nhập mã tài liệu (doc_id).",
         )
-        return json.dumps({
-            "success": False,
-            "action": "get_course_plan",
-            "data": {
-                "available_doc_ids": available_doc_ids,
-            },
-            "error": f"Không tìm thấy tài liệu có doc_id: {doc_id.strip()}",
-        }, ensure_ascii=False)
 
-    return json.dumps({
-        "success": True,
-        "action": "get_course_plan",
-        "data": {
-            "doc_id": matched_doc.doc_id,
-            "title": matched_doc.title,
-            "source": matched_doc.source,
-            "version": matched_doc.version,
-            "owner": matched_doc.owner,
-            "content": matched_doc.content,
-            "metadata": matched_doc.metadata,
-        },
-        "error": None,
-    }, ensure_ascii=False)
+    try:
+        result = find_course_plan(
+            context=retrieval_context,
+            course_id=doc_id.strip(),
+        )
 
-REQUEST_FILE = (
-    Path(__file__).resolve().parents[2]
-    / "data"
-    / "study_requests.json"
-)
+        # Nếu tool con đã trả về chuỗi JSON thì giải mã trước khi chuẩn hóa
+        if isinstance(result, str):
+            result = json.loads(result)
+
+        if isinstance(result, dict) and "success" in result:
+            return json.dumps(result, ensure_ascii=False)
+
+        return json_result(
+            True,
+            "get_course_plan",
+            data=result,
+        )
+
+    except Exception as exc:
+        return json_result(
+            False,
+            "get_course_plan",
+            error=f"Lỗi khi lấy kế hoạch môn học: {exc}",
+        )
 
 
 @mcp.tool()
@@ -136,146 +177,44 @@ def create_study_request(
 ) -> str:
     """Tạo và lưu yêu cầu hỗ trợ học tập của sinh viên."""
 
-    if not student_id.strip():
-        return json.dumps({
-            "success": False,
-            "action": "create_study_request",
-            "data": None,
-            "error": "Mã sinh viên không được để trống."
-        }, ensure_ascii=False)
+    try:
+        result = save_study_request(
+            student_id=student_id,
+            course_id=course_id,
+            request_content=request_content,
+        )
 
-    if not course_id.strip():
-        return json.dumps({
-            "success": False,
-            "action": "create_study_request",
-            "data": None,
-            "error": "Mã môn học không được để trống."
-        }, ensure_ascii=False)
+        if isinstance(result, str):
+            return result
 
-    if not request_content.strip():
-        return json.dumps({
-            "success": False,
-            "action": "create_study_request",
-            "data": None,
-            "error": "Nội dung yêu cầu không được để trống."
-        }, ensure_ascii=False)
+        return json.dumps(result, ensure_ascii=False)
 
-    # Đọc dữ liệu cũ; nếu file lỗi hoặc sai cấu trúc thì dừng, không ghi đè.
-    if REQUEST_FILE.exists():
-        try:
-            requests = json.loads(REQUEST_FILE.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            return json.dumps({
-                "success": False,
-                "action": "create_study_request",
-                "data": None,
-                "error": (
-                    "File yêu cầu học tập không phải JSON hợp lệ; "
-                    f"không ghi dữ liệu mới (dòng {exc.lineno}, cột {exc.colno})."
-                ),
-            }, ensure_ascii=False)
-        except OSError as exc:
-            return json.dumps({
-                "success": False,
-                "action": "create_study_request",
-                "data": None,
-                "error": (
-                    "Không thể đọc file yêu cầu học tập; "
-                    f"không ghi dữ liệu mới ({type(exc).__name__})."
-                ),
-            }, ensure_ascii=False)
-
-        if not isinstance(requests, list) or any(
-            not isinstance(item, dict)
-            or not isinstance(item.get("request_id"), str)
-            for item in requests
-        ):
-            return json.dumps({
-                "success": False,
-                "action": "create_study_request",
-                "data": None,
-                "error": (
-                    "Cấu trúc file yêu cầu học tập không hợp lệ; "
-                    "không ghi dữ liệu mới."
-                ),
-            }, ensure_ascii=False)
-    else:
-        requests = []
-
-    # Tạo mã yêu cầu mới
-    request_id = f"REQ{len(requests) + 1:04d}"
-
-    new_request = {
-        "request_id": request_id,
-        "student_id": student_id.strip(),
-        "course_id": course_id.strip(),
-        "request_content": request_content.strip(),
-        "created_at": datetime.now().isoformat(timespec="seconds"),
-        "status": "pending",
-    }
-
-    requests.append(new_request)
-
-    # Ghi dữ liệu xuống file JSON
-    REQUEST_FILE.parent.mkdir(parents=True, exist_ok=True)
-    REQUEST_FILE.write_text(
-        json.dumps(requests, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-
-    return json.dumps({
-        "success": True,
-        "action": "create_study_request",
-        "data": new_request,
-        "error": None
-    }, ensure_ascii=False)
+    except Exception as exc:
+        return json_result(
+            False,
+            "create_study_request",
+            error=f"Lỗi khi tạo yêu cầu học tập: {exc}",
+        )
 
 
 @mcp.tool()
 def get_study_request(request_id: str) -> str:
-    """Lấy thông tin yêu cầu học tập theo mã yêu cầu."""
-
-    if not request_id.strip():
-        return json.dumps({
-            "success": False,
-            "action": "get_study_request",
-            "data": None,
-            "error": "Vui lòng nhập mã yêu cầu."
-        }, ensure_ascii=False)
-
-    if not REQUEST_FILE.exists():
-        return json.dumps({
-            "success": False,
-            "action": "get_study_request",
-            "data": None,
-            "error": "Chưa có yêu cầu học tập nào được lưu."
-        }, ensure_ascii=False)
+    """Tra cứu yêu cầu học tập theo mã yêu cầu."""
 
     try:
-        requests = json.loads(REQUEST_FILE.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return json.dumps({
-            "success": False,
-            "action": "get_study_request",
-            "data": None,
-            "error": "Không thể đọc dữ liệu yêu cầu học tập."
-        }, ensure_ascii=False)
+        result = find_study_request(request_id=request_id)
 
-    for request in requests:
-        if request["request_id"].lower() == request_id.strip().lower():
-            return json.dumps({
-                "success": True,
-                "action": "get_study_request",
-                "data": request,
-                "error": None
-            }, ensure_ascii=False)
+        if isinstance(result, str):
+            return result
 
-    return json.dumps({
-        "success": False,
-        "action": "get_study_request",
-        "data": None,
-        "error": f"Không tìm thấy yêu cầu có mã: {request_id}"
-    }, ensure_ascii=False)
+        return json.dumps(result, ensure_ascii=False)
+
+    except Exception as exc:
+        return json_result(
+            False,
+            "get_study_request",
+            error=f"Lỗi khi tra cứu yêu cầu học tập: {exc}",
+        )
 
 
 if __name__ == "__main__":
