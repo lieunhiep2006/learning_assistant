@@ -67,27 +67,6 @@ def chunk_recursive(text:str,chunk_size:int=700)->list[str]:
     flush()
     return chunks
 
-def chunk_document(doc:Document,chunk_size:int=512,overlap:int=64)->list[DocumentChunk]:
-    chunks=[]
-    text=doc.content
-    start=0
-    while start<len(text):
-        end=min(start+chunk_size,len(text))
-        chunk_text=text[start:end]
-        chunk=DocumentChunk(content=chunk_text,chunk_id=f"{doc.doc_id}+{len(chunks)}",doc_id=doc.doc_id,chunk_index=len(chunks),
-        metadata={
-            "title":doc.title,
-            "source":doc.source,
-            **doc.metadata,
-            "chunk_size":chunk_size,
-            "overlap":overlap
-        }                   
-        )
-        chunks.append(chunk)
-        start+=chunk_size-overlap
-        if start>=len(text): break
-    return chunks
-
 def headings_split(body:str)->list[dict]:
     if body is None:
         return[]
