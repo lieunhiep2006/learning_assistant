@@ -11,9 +11,13 @@ from src.evaluation.metrics import (
 from src.evaluation.logger import save_evaluation
 
 
-TESTSET_PATH = Path("tests/testset.jsonl")
-STORE_PATH = Path("data/documents/document_store.json")
-CACHE_PATH = Path("data/documents/document_store.embeddings.json")
+# Đường dẫn dữ liệu
+BASE_DIR = Path(__file__).resolve().parents[2]
+TESTSET_PATH = BASE_DIR / "tests" / "testset.jsonl"
+STORE_PATH = BASE_DIR / "data" / "documents" / "document_store.json"
+CACHE_PATH = (
+    BASE_DIR / "data" / "documents" / "document_store.embeddings.json"
+)
 
 
 def load_testset(path: Path) -> list[dict]:
@@ -29,7 +33,8 @@ def load_testset(path: Path) -> list[dict]:
 
 
 def run_evaluation() -> None:
-    """Chạy đánh giá retrieval và lưu kết quả."""
+    """Chạy đánh giá retrieval và lưu kết quả Evaluation."""
+
     # 1. Đọc bộ dữ liệu kiểm thử
     cases = load_testset(TESTSET_PATH)
 
@@ -42,9 +47,11 @@ def run_evaluation() -> None:
     # 3. Chuẩn bị dữ liệu tính metrics
     expected_answers = []
     actual_answers = []
+
     expected_sources = []
     retrieved_sources = []
     source_matches = []
+
     case_results = []
 
     # 4. Chạy từng trường hợp kiểm thử
@@ -56,35 +63,47 @@ def run_evaluation() -> None:
             mode="hybrid",
         )
 
-        actual_answer = result["status"] == "ok"
+        # Đọc định dạng trả về mới của search_lessons()
+        actual_answer = result["success"]
+        result_data = result["data"] or {}
+        retrieved_sources_for_case = result_data.get("sources", [])
 
+        # Chuẩn bị dữ liệu tính Refusal Accuracy
         expected_answers.append(case["expect_answer"])
         actual_answers.append(actual_answer)
 
+        # Chỉ đánh giá nguồn đối với test case có nguồn mong đợi
         if case["expected_sources"]:
             expected_sources.append(case["expected_sources"])
-            retrieved_sources.append(result["sources"])
+            retrieved_sources.append(retrieved_sources_for_case)
             source_matches.append(case["source_match"])
 
-        # Lưu chi tiết kết quả của từng câu hỏi
-        case_results.append({
+        # Lưu chi tiết từng test case
+        case_result = {
             "id": case["id"],
             "question": case["question"],
             "expected_answer": case["expect_answer"],
             "actual_answer": actual_answer,
-            "status": result["status"],
+            "action": result["action"],
+            "status": "ok" if actual_answer else "no_answer",
             "expected_sources": case["expected_sources"],
-            "retrieved_sources": result["sources"],
-        })
+            "retrieved_sources": retrieved_sources_for_case,
+            "error": result["error"],
+        }
+
+        case_results.append(case_result)
 
         # Hiển thị kết quả từng trường hợp
         print(f"\nID: {case['id']}")
         print(f"Question: {case['question']}")
         print(f"Expected answer: {case['expect_answer']}")
         print(f"Actual answer: {actual_answer}")
-        print(f"Status: {result['status']}")
+        print(f"Status: {case_result['status']}")
         print(f"Expected sources: {case['expected_sources']}")
-        print(f"Retrieved sources: {result['sources']}")
+        print(f"Retrieved sources: {retrieved_sources_for_case}")
+
+        if result["error"]:
+            print(f"Error: {result['error']}")
 
     # 5. Tính các chỉ số đánh giá
     refusal_score = refusal_accuracy(
@@ -92,15 +111,14 @@ def run_evaluation() -> None:
         actual_answers,
     )
 
-    source_score = (
-        source_retrieval_accuracy(
+    if expected_sources:
+        source_score = source_retrieval_accuracy(
             expected_sources,
             retrieved_sources,
             source_matches,
         )
-        if expected_sources
-        else 0.0
-    )
+    else:
+        source_score = 0.0
 
     # 6. Hiển thị tổng kết
     print("\n===== EVALUATION RESULTS =====")
@@ -109,7 +127,7 @@ def run_evaluation() -> None:
     print(f"Source Retrieval Accuracy: {source_score:.2%}")
     print(f"Số câu được đánh giá nguồn: {len(expected_sources)}")
 
-    # 7. Lưu kết quả vào file JSONL
+    # 7. Lưu kết quả Evaluation
     save_evaluation({
         "total_questions": len(cases),
         "refusal_accuracy": refusal_score,

@@ -19,6 +19,11 @@ result = search_lessons(
     mode="hybrid",
 )
 
-print("STATUS:", result["status"])
-print("CONTEXT:", result["context"])
-print("SOURCES:", result["sources"])
+print("SUCCESS:", result["success"])
+print("ACTION:", result["action"])
+print("DATA:", result["data"])
+print("ERROR:", result["error"])
+
+if result["data"] is not None:
+    print("CONTEXT:", result["data"]["context"])
+    print("SOURCES:", result["data"]["sources"])
