@@ -11,11 +11,14 @@ class CoursePlanResult(TypedDict):
     error: str | None
 
 
+MAX_CONTENT_LENGTH = 3000
+
+
 def get_course_plan(
     context: RetrievalContext,
     course_id: str,
 ) -> CoursePlanResult:
-    """Lấy nội dung tài liệu theo mã môn học hoặc mã tài liệu."""
+    """Lấy thông tin môn học và một phần nội dung tài liệu."""
 
     course_id = course_id.strip()
 
@@ -29,6 +32,9 @@ def get_course_plan(
 
     for document in context.store.documents.values():
         if document.doc_id.lower() == course_id.lower():
+            content = document.content
+            truncated = len(content) > MAX_CONTENT_LENGTH
+
             return {
                 "success": True,
                 "action": "get_course_plan",
@@ -38,7 +44,9 @@ def get_course_plan(
                     "version": document.version,
                     "owner": document.owner,
                     "source": document.source,
-                    "content": document.content,
+                    "content": content[:MAX_CONTENT_LENGTH],
+                    "content_truncated": truncated,
+                    "original_length": len(content),
                 },
                 "error": None,
             }
