@@ -1,13 +1,63 @@
 {
   "documents": [
     {
+      "content": "# Kiến trúc máy tính và hợp ngữ (CA101)\n\nMôn học 3 tín chỉ, kéo dài 6 tuần, dành cho sinh viên năm hai ngành Khoa học máy tính. Môn học tiên quyết là Nhập môn lập trình. Công cụ sử dụng trong phòng lab là trình biên dịch NASM và trình gỡ lỗi GDB trên Linux, kiến trúc x86-64.\n\n## Tuần 1: Tổng quan kiến trúc máy tính\n\n### Bài 1.1: Các thành phần của máy tính\n\n#### Mục tiêu\n\nSinh viên mô tả được bốn thành phần chính của máy tính theo mô hình von Neumann: bộ xử lý trung tâm (CPU), bộ nhớ, thiết bị vào ra và hệ thống bus.\n\n#### Nội dung\n\nMô hình von Neumann lưu chương trình và dữ liệu trong cùng một bộ nhớ. CPU gồm đơn vị điều khiển, đơn vị số học và logic (ALU) và tập thanh ghi. Bus được chia thành bus địa chỉ, bus dữ liệu và bus điều khiển.\n\n#### Bài tập\n\nBài tập 1 là phiếu trả lời ngắn về các thành phần của máy tính. Hạn nộp là cuối Tuần 1.\n\n### Bài 1.2: Chu kỳ lệnh\n\n#### Mục tiêu\n\nSinh viên trình bày được các giai đoạn của chu kỳ lệnh: nạp lệnh, giải mã, thực thi và ghi kết quả.\n\n#### Nội dung\n\nThanh ghi bộ đếm chương trình (PC) giữ địa chỉ của lệnh kế tiếp. Sau mỗi lần nạp lệnh, PC tăng lên để trỏ đến lệnh sau. Một số lệnh nhảy làm thay đổi giá trị PC trực tiếp.\n\n## Tuần 2: Biểu diễn dữ liệu\n\n### Bài 2.1: Hệ cơ số và số nguyên\n\n#### Mục tiêu\n\nSinh viên chuyển đổi được giữa hệ nhị phân, thập phân và thập lục phân.\n\n#### Nội dung\n\nSố nguyên không dấu dùng toàn bộ các bit để biểu diễn giá trị. Số nguyên có dấu dùng biểu diễn bù hai, trong đó bit cao nhất là bit dấu. Với 8 bit, số có dấu biểu diễn được từ -128 đến 127.\n\n#### Bài tập\n\nBài tập 2 gồm 15 câu chuyển đổi cơ số và biểu diễn bù hai. Hạn nộp là cuối Tuần 2.\n\n### Bài 2.2: Số thực và ký tự\n\n#### Mục tiêu\n\nSinh viên nhận biết được cách biểu diễn số thực dấu phẩy động theo chuẩn IEEE 754 và cách mã hóa ký tự ASCII.\n\n#### Nội dung\n\nSố thực dấu phẩy động 32 bit gồm 1 bit dấu, 8 bit mũ và 23 bit phần định trị. Bảng mã ASCII dùng 7 bit để biểu diễn 128 ký tự.\n\n## Tuần 3: Tập lệnh và thanh ghi\n\n### Bài 3.1: Thanh ghi trong x86-64\n\n#### Mục tiêu\n\nSinh viên liệt kê được các thanh ghi đa dụng của x86-64 và vai trò của chúng.\n\n#### Nội dung\n\nKiến trúc x86-64 có 16 thanh ghi đa dụng 64 bit, trong đó có RAX, RBX, RCX, RDX, RSI, RDI, RSP và RBP. Thanh ghi RSP trỏ đến đỉnh ngăn xếp. Thanh ghi cờ lưu các cờ như cờ không (ZF) và cờ nhớ (CF).\n\n### Bài 3.2: Các lệnh cơ bản\n\n#### Mục tiêu\n\nSinh viên sử dụng được các lệnh chuyển dữ liệu và lệnh số học cơ bản.\n\n#### Nội dung\n\nLệnh MOV sao chép dữ liệu giữa thanh ghi và bộ nhớ. Lệnh ADD và SUB thực hiện phép cộng và phép trừ. Lệnh CMP so sánh hai toán hạng và đặt các cờ tương ứng.\n\n#### Bài tập\n\nLab 1 yêu cầu viết chương trình hợp ngữ tính tổng của một mảng số nguyên bằng NASM. Hạn nộp là cuối Tuần 3.\n\n## Tuần 4: Luồng điều khiển và ngăn xếp\n\n### Bài 4.1: Lệnh nhảy và vòng lặp\n\n#### Mục tiêu\n\nSinh viên viết được cấu trúc rẽ nhánh và vòng lặp bằng các lệnh nhảy có điều kiện.\n\n#### Nội dung\n\nLệnh JMP nhảy vô điều kiện. Lệnh JE và JNE nhảy dựa vào cờ ZF. Vòng lặp được xây dựng bằng cách kết hợp lệnh CMP với một lệnh nhảy có điều kiện quay về nhãn đầu vòng lặp.\n\n### Bài 4.2: Ngăn xếp và lời gọi hàm\n\n#### Mục tiêu\n\nSinh viên giải thích được cách ngăn xếp lưu địa chỉ trả về và các biến cục bộ khi gọi hàm.\n\n#### Nội dung\n\nLệnh PUSH đặt một giá trị lên ngăn xếp và giảm RSP. Lệnh POP lấy giá trị ra và tăng RSP. Lệnh CALL lưu địa chỉ trả về lên ngăn xếp, và lệnh RET lấy địa chỉ đó ra để quay lại nơi gọi.\n\n#### Bài tập\n\nLab 2 yêu cầu viết một hàm hợp ngữ tính giai thừa và gọi hàm đó từ chương trình chính. Hạn nộp là cuối Tuần 4.\n\n## Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ\n\n### Bài 5.1: Kiểm tra giữa kỳ\n\n#### Nội dung\n\nBài kiểm tra giữa kỳ là bài viết trên giấy, thời gian 60 phút, diễn ra vào buổi học đầu tiên của Tuần 5. Phạm vi gồm nội dung từ Tuần 1 đến Tuần 4. Sinh viên không được sử dụng tài liệu.\n\n### Bài 5.2: Phân cấp bộ nhớ\n\n#### Mục tiêu\n\nSinh viên giải thích được vì sao máy tính dùng nhiều tầng bộ nhớ.\n\n#### Nội dung\n\nPhân cấp bộ nhớ gồm thanh ghi, bộ nhớ đệm (cache), bộ nhớ chính (RAM) và bộ nhớ ngoài. Tầng càng gần CPU thì truy cập càng nhanh nhưng dung lượng càng nhỏ và giá thành mỗi byte càng cao.\n\n## Tuần 6: Bộ nhớ đệm và ôn tập\n\n### Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm\n\n#### Mục tiêu\n\nSinh viên phân biệt được cục bộ về thời gian và cục bộ về không gian, và tính được tỷ lệ trúng cache.\n\n#### Nội dung\n\nCục bộ về thời gian nghĩa là dữ liệu vừa được truy cập có xu hướng được truy cập lại sớm. Cục bộ về không gian nghĩa là các ô nhớ lân cận có xu hướng được truy cập tiếp theo. Tỷ lệ trúng cache bằng số lần trúng chia cho tổng số lần truy cập.\n\n#### Bài tập\n\nBài tập 3 gồm 8 câu tính tỷ lệ trúng cache và thời gian truy cập trung bình. Hạn nộp là cuối Tuần 6.\n\n### Bài 6.2: Ôn tập và đánh giá\n\n#### Nội dung\n\nBuổi ôn tập diễn ra vào buổi học cuối của Tuần 6. Thi cuối kỳ diễn ra sau Tuần 6, hình thức thi viết 90 phút.\n\n## Đánh giá môn học\n\n### Cơ cấu điểm\n\n#### Nội dung\n\nĐiểm chuyên cần chiếm 10 phần trăm. Điểm lab và bài tập chiếm 20 phần trăm. Điểm kiểm tra giữa kỳ chiếm 30 phần trăm. Điểm thi cuối kỳ chiếm 40 phần trăm. Sinh viên cần đạt tối thiểu 4 trên 10 điểm thi cuối kỳ để đậu môn học.",
+      "doc_id": "CA101",
+      "title": "Kiến trúc máy tính và hợp ngữ",
+      "source": "data/documents/CA101_course_material.md",
+      "version": "2026-09-02",
+      "owner": "Bộ môn Kỹ thuật máy tính",
+      "created_at": "2026-10-17T16:00:59.916872",
+      "metadata": {}
+    },
+    {
+      "content": "# Nhập môn lập trình (CS101)\n\nTài liệu học tập mẫu cho môn CS101, dành cho sinh viên mới học lập trình. Nội dung bao gồm tư duy thuật toán, biến và kiểu dữ liệu, câu lệnh điều khiển, hàm, mảng, chuỗi và các kỹ thuật giải quyết bài toán cơ bản. Ví dụ mã nguồn sử dụng Python để minh họa; cú pháp có thể cần điều chỉnh nếu lớp học sử dụng ngôn ngữ khác.\n\n## Tuần 1: Tổng quan lập trình và thuật toán\n\n### Bài 1.1: Thuật toán và chương trình\n\n#### Mục tiêu\n\nSinh viên mô tả được thuật toán như một chuỗi bước hữu hạn để giải quyết bài toán và phân biệt thuật toán với chương trình thực thi.\n\n#### Nội dung\n\nMột thuật toán cần có đầu vào, đầu ra và các bước xử lý rõ ràng. Trước khi viết mã, nên xác định yêu cầu, chia bài toán thành các bước nhỏ và kiểm tra kết quả mong đợi bằng ví dụ.\n\n#### Bài tập\n\nViết thuật toán dạng giả mã để tính tổng hai số nguyên và tìm số lớn hơn trong hai số.\n\n### Bài 1.2: Cấu trúc chương trình\n\n#### Mục tiêu\n\nSinh viên nhận biết được cách một chương trình nhận dữ liệu, xử lý và xuất kết quả.\n\n#### Nội dung\n\nMột chương trình đơn giản thường gồm phần nhập dữ liệu, xử lý và in kết quả. Lỗi cú pháp xảy ra khi mã không tuân thủ quy tắc ngôn ngữ; lỗi logic xảy ra khi chương trình chạy nhưng cho kết quả sai.\n\n## Tuần 2: Biến, kiểu dữ liệu và biểu thức\n\n### Bài 2.1: Biến và kiểu dữ liệu\n\n#### Mục tiêu\n\nSinh viên khai báo hoặc tạo biến phù hợp để lưu trữ dữ liệu và giải thích được vai trò của kiểu dữ liệu.\n\n#### Nội dung\n\nBiến là tên tham chiếu đến một giá trị trong chương trình. Các kiểu dữ liệu thường gặp gồm số nguyên, số thực, chuỗi ký tự và giá trị logic. Việc chọn kiểu dữ liệu phù hợp giúp phép tính và thao tác dữ liệu có ý nghĩa.\n\n#### Bài tập\n\nViết chương trình nhập chiều dài và chiều rộng hình chữ nhật, sau đó in diện tích và chu vi.\n\n### Bài 2.2: Toán tử và biểu thức\n\n#### Mục tiêu\n\nSinh viên sử dụng được toán tử số học, so sánh và logic trong biểu thức.\n\n#### Nội dung\n\nCác toán tử số học thường gồm cộng, trừ, nhân, chia và chia lấy dư. Toán tử so sánh tạo ra kết quả đúng/sai; toán tử logic kết hợp các điều kiện. Cần chú ý thứ tự ưu tiên toán tử và dùng dấu ngoặc khi muốn làm rõ thứ tự tính.\n\n## Tuần 3: Rẽ nhánh và vòng lặp\n\n### Bài 3.1: Câu lệnh điều kiện\n\n#### Mục tiêu\n\nSinh viên dùng cấu trúc `if`, `elif` và `else` để lựa chọn hành động dựa trên điều kiện.\n\n#### Nội dung\n\nCâu lệnh điều kiện cho phép chương trình thực hiện các nhánh khác nhau tùy theo biểu thức logic. Điều kiện cần được kiểm tra với cả trường hợp biên, chẳng hạn giá trị bằng ngưỡng, nhỏ hơn ngưỡng hoặc lớn hơn ngưỡng.\n\n#### Bài tập\n\nViết chương trình phân loại một số nguyên là âm, dương hoặc bằng không.\n\n### Bài 3.2: Vòng lặp\n\n#### Mục tiêu\n\nSinh viên chọn và sử dụng vòng lặp để lặp lại một khối lệnh.\n\n#### Nội dung\n\nVòng lặp `for` thường phù hợp khi duyệt qua một dãy phần tử hoặc một số lần xác định. Vòng lặp `while` tiếp tục chạy khi điều kiện còn đúng. Cần bảo đảm điều kiện dừng có thể đạt được để tránh vòng lặp vô hạn.\n\n#### Bài tập\n\nViết chương trình tính tổng các số nguyên từ 1 đến n bằng vòng lặp.\n\n## Tuần 4: Hàm và đệ quy\n\n### Bài 4.1: Hàm, tham số và giá trị trả về\n\n#### Mục tiêu\n\nSinh viên chia chương trình thành các hàm có nhiệm vụ rõ ràng, truyền tham số và trả về kết quả bằng `return`.\n\n#### Nội dung\n\nHàm là một khối mã có thể được gọi nhiều lần. Tham số nhận dữ liệu đầu vào; giá trị trả về là kết quả mà hàm gửi lại cho nơi gọi. Hàm nên có tên mô tả nhiệm vụ và tránh đảm nhiệm quá nhiều công việc không liên quan.\n\n#### Bài tập\n\nViết hàm nhận vào hai số và trả về số lớn hơn. Kiểm thử với số âm, hai số bằng nhau và các giá trị khác nhau.\n\n### Bài 4.2: Hàm đệ quy (Recursive Functions)\n\n#### Mục tiêu\n\nSinh viên giải thích được đệ quy, xác định trường hợp cơ sở và trường hợp đệ quy, đồng thời viết và kiểm thử được một hàm đệ quy đơn giản.\n\n#### Nội dung\n\n**Đệ quy** là kỹ thuật trong đó một hàm gọi lại chính nó để giải quyết một phiên bản nhỏ hơn của cùng bài toán. Một hàm đệ quy đúng cần có:\n\n1. **Trường hợp cơ sở (base case):** điều kiện dừng, trả về kết quả mà không gọi tiếp chính hàm đó.\n2. **Trường hợp đệ quy (recursive case):** chia bài toán thành bài toán nhỏ hơn và gọi lại hàm với đầu vào tiến gần đến trường hợp cơ sở.\n3. **Tiến trình đến điểm dừng:** mỗi lời gọi cần làm cho bài toán nhỏ hơn hoặc tiến gần điều kiện dừng; nếu không, chương trình có thể gọi vô hạn cho đến khi xảy ra lỗi tràn ngăn xếp (recursion depth/stack overflow tùy ngôn ngữ).\n\n#### Ví dụ 1: Tính giai thừa\n\nGiai thừa của số nguyên không âm n được định nghĩa là `n! = 1` khi `n = 0`, và `n! = n × (n-1)!` khi `n > 0`.\n\n```python\ndef factorial(n):\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    if n == 0:                 # base case\n        return 1\n    return n * factorial(n - 1)  # recursive case\n```\n\nVới `factorial(4)`, các lời gọi lần lượt giảm đối số: `factorial(4)`, `factorial(3)`, `factorial(2)`, `factorial(1)`, `factorial(0)`. Trường hợp cơ sở trả về `1`, sau đó các lời gọi đang chờ trả về lần lượt `1`, `2`, `6` và `24`.\n\n#### Ví dụ 2: Tính tổng từ 1 đến n\n\n```python\ndef sum_to_n(n):\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    if n == 0:             # base case\n        return 0\n    return n + sum_to_n(n - 1)  # recursive case\n```\n\nVí dụ, `sum_to_n(4)` trả về `4 + 3 + 2 + 1 + 0 = 10`.\n\n#### Cách phân tích một bài đệ quy\n\n- Xác định đầu vào và kết quả cần trả về.\n- Tìm trường hợp nhỏ nhất có thể trả lời trực tiếp.\n- Viết quan hệ giữa kết quả hiện tại và lời gọi với đầu vào nhỏ hơn.\n- Kiểm tra rằng đầu vào tiến đến trường hợp cơ sở.\n- Lần theo các lời gọi bằng một ví dụ nhỏ trước khi kiểm thử đầu vào lớn hơn.\n\n#### Lỗi thường gặp\n\n- **Thiếu trường hợp cơ sở:** hàm tiếp tục gọi chính nó và không dừng đúng cách.\n- **Trường hợp cơ sở không thể đạt tới:** đối số không giảm hoặc không tiến về điều kiện dừng.\n- **Sai giá trị trả về:** dùng `print()` thay vì `return` khi cần kết quả để tính tiếp.\n- **Sai công thức đệ quy:** ví dụ gọi `factorial(n)` thay vì `factorial(n - 1)` trong trường hợp đệ quy.\n- **Không xử lý đầu vào biên:** cần xác định hàm sẽ làm gì với `n = 0`, `n = 1` hoặc đầu vào không hợp lệ.\n\n#### Bài tập tự luyện\n\n1. Viết hàm đệ quy tính tổng các chữ số của một số nguyên không âm.\n2. Viết hàm đệ quy đếm số phần tử trong một danh sách.\n3. Viết hàm đệ quy tìm số Fibonacci thứ n; xác định trường hợp cơ sở cho `n = 0` và `n = 1`.\n4. Với mỗi hàm, chỉ rõ base case, recursive case và giải thích vì sao lời gọi sẽ dừng.\n5. So sánh lời giải đệ quy với lời giải dùng vòng lặp về độ dễ hiểu và chi phí lời gọi hàm.\n\n### Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi\n\n#### Mục tiêu\n\nSinh viên mô phỏng được thứ tự gọi hàm và trả kết quả khi có nhiều lời gọi lồng nhau.\n\n#### Nội dung\n\nMỗi lần gọi hàm, chương trình cần theo dõi thông tin của lời gọi hiện tại, bao gồm tham số và vị trí tiếp tục thực thi sau khi hàm trả về. Trong đệ quy, nhiều lời gọi của cùng một hàm có thể đang chờ kết quả cùng lúc. Khi chạm trường hợp cơ sở, các lời gọi được hoàn tất theo thứ tự ngược lại với thứ tự chúng được tạo ra.\n\n#### Bài tập\n\nVẽ sơ đồ lời gọi của `factorial(3)` và ghi kết quả trả về ở từng bước.\n\n## Tuần 5: Mảng, danh sách và chuỗi\n\n### Bài 5.1: Cấu trúc dữ liệu tuần tự\n\n#### Mục tiêu\n\nSinh viên truy cập, duyệt và cập nhật phần tử trong mảng hoặc danh sách.\n\n#### Nội dung\n\nMảng hoặc danh sách lưu nhiều phần tử theo thứ tự. Chỉ số thường bắt đầu từ 0 trong Python. Khi duyệt danh sách, cần tránh truy cập chỉ số ngoài phạm vi và phân biệt chỉ số với giá trị phần tử.\n\n#### Bài tập\n\nViết hàm tìm giá trị lớn nhất trong danh sách số, có xử lý trường hợp danh sách rỗng.\n\n### Bài 5.2: Xử lý chuỗi\n\n#### Mục tiêu\n\nSinh viên sử dụng được các thao tác cơ bản để duyệt và xử lý chuỗi.\n\n#### Nội dung\n\nChuỗi biểu diễn dãy ký tự. Các thao tác cơ bản gồm lấy độ dài, truy cập ký tự, cắt chuỗi và kiểm tra sự xuất hiện của chuỗi con. Khi xử lý văn bản, cần kiểm tra chuỗi rỗng và phân biệt chữ hoa với chữ thường nếu yêu cầu bài toán có quy định.\n\n## Tuần 6: Kiểm thử, gỡ lỗi và ôn tập\n\n### Bài 6.1: Kiểm thử và gỡ lỗi\n\n#### Mục tiêu\n\nSinh viên xây dựng được các ca kiểm thử cơ bản và xác định nguyên nhân của lỗi cú pháp hoặc lỗi logic.\n\n#### Nội dung\n\nMột bộ kiểm thử nên bao gồm trường hợp thông thường, trường hợp biên và đầu vào không hợp lệ khi phù hợp. Với hàm đệ quy, đặc biệt kiểm tra trường hợp cơ sở, trường hợp sát cơ sở và đầu vào làm phát sinh nhiều lời gọi.\n\n#### Bài tập\n\nViết các ca kiểm thử cho `factorial(n)` với `n = 0`, `n = 1`, `n = 4` và `n = -1`.\n\n### Bài 6.2: Ôn tập và đánh giá\n\n#### Nội dung\n\nNội dung ôn tập gồm thuật toán, biến và kiểu dữ liệu, biểu thức, rẽ nhánh, vòng lặp, hàm, đệ quy, cấu trúc dữ liệu tuần tự và kiểm thử. Khi giải bài, sinh viên nên giải thích cách tiếp cận, viết mã, chạy các ca kiểm thử và sửa lỗi dựa trên kết quả quan sát được.\n\n## Ghi chú hỗ trợ nhanh: Hàm đệ quy trong CS101\n\nNếu cần hỗ trợ gấp về recursive functions, hãy kiểm tra ba câu hỏi sau:\n\n1. **Dừng ở đâu?** Xác định điều kiện cơ sở, chẳng hạn `n == 0`.\n2. **Gọi lại với bài toán nào nhỏ hơn?** Ví dụ `factorial(n - 1)`.\n3. **Kết quả được kết hợp như thế nào?** Ví dụ `n * factorial(n - 1)`.\n\nMẫu tổng quát:\n\n```python\ndef recursive_function(problem):\n    if base_case(problem):\n        return direct_answer(problem)\n    smaller_result = recursive_function(smaller_problem(problem))\n    return combine(problem, smaller_result)\n```\n\nMẫu trên chỉ là sơ đồ ý tưởng; `base_case`, `direct_answer`, `smaller_problem` và `combine` cần được thay bằng điều kiện và phép tính cụ thể của từng bài toán.",
+      "doc_id": "CS101",
+      "title": "Nhập môn lập trình",
+      "source": "data/documents/CS101_course_material.md",
+      "version": "2026-10-13",
+      "owner": "Bộ môn Khoa học máy tính",
+      "created_at": "2026-10-17T16:00:59.918898",
+      "metadata": {}
+    },
+    {
+      "content": "# Cấu trúc dữ liệu và giải thuật (CS102)\n\nTài liệu học tập mẫu về cách tổ chức dữ liệu và thiết kế thuật toán cơ bản. Ví dụ minh họa sử dụng Python.\n\n## Tuần 1: Phân tích thuật toán\n\n### Bài 1.1: Độ phức tạp thời gian\n\n#### Mục tiêu\nSinh viên mô tả được chi phí thực thi của thuật toán khi kích thước đầu vào tăng.\n\n#### Nội dung\nĐộ phức tạp thời gian biểu diễn xu hướng tăng số phép toán theo kích thước đầu vào. Ký hiệu Big-O thường dùng để mô tả cận trên tiệm cận. Ví dụ, duyệt một danh sách n phần tử thường có độ phức tạp O(n), còn hai vòng lặp lồng nhau cùng chạy n lần thường tạo ra O(n²).\n\n#### Bài tập\nSo sánh số lần lặp của một vòng lặp đơn với hai vòng lặp lồng nhau.\n\n### Bài 1.2: Tìm kiếm\n\n#### Mục tiêu\nPhân biệt tìm kiếm tuyến tính và tìm kiếm nhị phân.\n\n#### Nội dung\nTìm kiếm tuyến tính kiểm tra từng phần tử, có thời gian O(n) trong trường hợp xấu nhất. Tìm kiếm nhị phân liên tục chia đôi phạm vi tìm kiếm và có thời gian O(log n), nhưng yêu cầu dữ liệu đã được sắp xếp.\n\n## Tuần 2: Mảng, danh sách liên kết và ngăn xếp\n\n### Bài 2.1: Mảng và danh sách liên kết\n\n#### Mục tiêu\nGiải thích được sự khác nhau giữa truy cập phần tử theo chỉ số và duyệt qua các nút.\n\n#### Nội dung\nMảng hỗ trợ truy cập theo chỉ số trong thời gian O(1) trong mô hình thông thường. Danh sách liên kết lưu các nút có liên kết đến nút tiếp theo; muốn đến một vị trí thường phải duyệt từ đầu, mất O(n).\n\n### Bài 2.2: Ngăn xếp và hàng đợi\n\n#### Mục tiêu\nSử dụng được hai cấu trúc dữ liệu tuyến tính cơ bản.\n\n#### Nội dung\nNgăn xếp hoạt động theo nguyên tắc LIFO (vào sau, ra trước), với các thao tác push và pop. Hàng đợi hoạt động theo nguyên tắc FIFO (vào trước, ra trước), với các thao tác enqueue và dequeue.\n\n#### Bài tập\nMô phỏng thứ tự phần tử sau một chuỗi thao tác push/pop và enqueue/dequeue.\n\n## Tuần 3: Sắp xếp\n\n### Bài 3.1: Thuật toán sắp xếp cơ bản\n\n#### Mục tiêu\nMô tả được ý tưởng của bubble sort, selection sort và insertion sort.\n\n#### Nội dung\nBubble sort đổi chỗ các phần tử kề nhau nếu sai thứ tự. Selection sort tìm phần tử nhỏ nhất trong phần chưa sắp xếp rồi đưa về vị trí kế tiếp. Insertion sort lần lượt chèn từng phần tử vào vị trí thích hợp trong phần đã sắp xếp. Các thuật toán này thường có thời gian O(n²) trong trường hợp trung bình hoặc xấu nhất.\n\n#### Bài tập\nSắp xếp danh sách [5, 2, 4, 1] bằng insertion sort và ghi lại trạng thái sau mỗi lượt.\n\n### Bài 3.2: Merge sort và quicksort\n\n#### Mục tiêu\nTrình bày được ý tưởng chia để trị trong sắp xếp.\n\n#### Nội dung\nMerge sort chia dữ liệu thành các phần nhỏ, sắp xếp từng phần rồi trộn lại; thời gian điển hình O(n log n). Quicksort chọn pivot, phân hoạch dữ liệu rồi sắp xếp đệ quy các phần; thời gian trung bình O(n log n), nhưng trường hợp xấu nhất có thể là O(n²).\n\n## Tuần 4: Cây và bảng băm\n\n### Bài 4.1: Cây tìm kiếm nhị phân\n\n#### Mục tiêu\nGiải thích cấu trúc nút, cây con trái và cây con phải.\n\n#### Nội dung\nTrong cây tìm kiếm nhị phân, các khóa ở cây con trái nhỏ hơn khóa nút theo quy ước so sánh, còn các khóa ở cây con phải lớn hơn. Thời gian thao tác phụ thuộc vào chiều cao cây; cây cân bằng thường cho thao tác tìm kiếm O(log n), trong khi cây lệch có thể cần O(n).\n\n### Bài 4.2: Bảng băm\n\n#### Mục tiêu\nGiải thích cách ánh xạ khóa thành vị trí lưu trữ.\n\n#### Nội dung\nHàm băm chuyển khóa thành giá trị dùng để xác định vị trí trong bảng. Va chạm xảy ra khi nhiều khóa ánh xạ đến cùng vị trí. Hai chiến lược xử lý phổ biến là chaining và open addressing.\n\n## Tuần 5: Đồ thị\n\n### Bài 5.1: Biểu diễn đồ thị\n\n#### Mục tiêu\nPhân biệt danh sách kề và ma trận kề.\n\n#### Nội dung\nDanh sách kề lưu các đỉnh kề với từng đỉnh và thường tiết kiệm bộ nhớ cho đồ thị thưa. Ma trận kề dùng ma trận để thể hiện cạnh giữa các cặp đỉnh và có thể truy vấn sự tồn tại của cạnh trong O(1), nhưng cần O(V²) bộ nhớ.\n\n### Bài 5.2: BFS và DFS\n\n#### Mục tiêu\nMô tả được tìm kiếm theo chiều rộng và chiều sâu.\n\n#### Nội dung\nBFS duyệt theo từng lớp khoảng cách và thường dùng hàng đợi. DFS đi sâu theo một nhánh trước khi quay lui, thường triển khai bằng đệ quy hoặc ngăn xếp.\n\n## Tuần 6: Ôn tập và kiểm thử\n\n### Bài 6.1: Chọn thuật toán\n\n#### Nội dung\nViệc lựa chọn thuật toán cần cân nhắc kích thước dữ liệu, yêu cầu đầu ra, độ phức tạp thời gian và bộ nhớ, cũng như mức độ đơn giản khi triển khai.\n\n### Bài 6.2: Kiểm thử\n\n#### Nội dung\nKiểm thử nên bao gồm đầu vào thông thường, trường hợp biên và dữ liệu có thể làm lộ lỗi. Với thuật toán sắp xếp, cần kiểm tra danh sách rỗng, một phần tử, phần tử trùng nhau và dữ liệu đã được sắp xếp.",
+      "doc_id": "CS102",
+      "title": "Cấu trúc dữ liệu và giải thuật",
+      "source": "data/documents/CS102_data_structures_algorithms.md",
+      "version": "2026-10-13",
+      "owner": "Bộ môn Khoa học máy tính",
+      "created_at": "2026-10-17T16:00:59.920424",
+      "metadata": {}
+    },
+    {
+      "content": "# Lập trình hướng đối tượng (CS201)\n\nTài liệu mẫu giới thiệu các khái niệm lập trình hướng đối tượng (OOP). Ví dụ sử dụng cú pháp gần với Python; một số khái niệm cũng áp dụng trong Java, C++ và C#.\n\n## Tuần 1: Lớp và đối tượng\n\n### Bài 1.1: Lớp và đối tượng\n\n#### Mục tiêu\nPhân biệt được lớp (class) với đối tượng (object).\n\n#### Nội dung\nLớp định nghĩa cấu trúc và hành vi chung; đối tượng là một thể hiện cụ thể của lớp. Thuộc tính biểu diễn trạng thái, còn phương thức biểu diễn hành vi.\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n\nstudent = Student(\"An\")\n```\n\nTrong ví dụ, `Student` là lớp và `student` tham chiếu đến một đối tượng có thuộc tính `name`.\n\n### Bài 1.2: Hàm khởi tạo\n\n#### Mục tiêu\nHiểu vai trò của hàm khởi tạo khi tạo đối tượng.\n\n#### Nội dung\nTrong Python, `__init__` được gọi để khởi tạo trạng thái của đối tượng sau khi đối tượng được tạo. Tham số `self` tham chiếu đến đối tượng hiện tại.\n\n## Tuần 2: Đóng gói và giao diện\n\n### Bài 2.1: Đóng gói\n\n#### Mục tiêu\nGiải thích được lý do gom dữ liệu và hành vi trong một lớp.\n\n#### Nội dung\nĐóng gói tổ chức dữ liệu và phương thức liên quan trong cùng một đơn vị, đồng thời định hướng cách bên ngoài tương tác với trạng thái của đối tượng. Python sử dụng quy ước đặt tên và cơ chế truy cập thay vì áp dụng mức truy cập như một số ngôn ngữ khác.\n\n### Bài 2.2: Thuộc tính và phương thức\n\n#### Mục tiêu\nThiết kế được phương thức để thao tác với trạng thái đối tượng.\n\n#### Nội dung\nPhương thức thường dùng dữ liệu của đối tượng để thực hiện một hành động. Nên xác định rõ trách nhiệm của từng phương thức và tránh để nhiều phần của chương trình sửa trạng thái theo những cách không nhất quán.\n\n## Tuần 3: Kế thừa và đa hình\n\n### Bài 3.1: Kế thừa\n\n#### Mục tiêu\nMô tả được quan hệ lớp cha và lớp con.\n\n#### Nội dung\nKế thừa cho phép lớp con sử dụng hoặc mở rộng hành vi của lớp cha. Chỉ nên dùng kế thừa khi quan hệ giữa các lớp thể hiện hợp lý quan hệ “là một” (is-a).\n\n### Bài 3.2: Đa hình\n\n#### Mục tiêu\nGiải thích được cách các đối tượng khác loại có thể cung cấp cùng một giao diện hành vi.\n\n#### Nội dung\nĐa hình cho phép cùng một lời gọi phương thức tạo ra hành vi khác nhau tùy theo đối tượng thực tế. Ví dụ, các lớp `Circle` và `Rectangle` có thể cùng triển khai phương thức `area()` nhưng tính diện tích theo công thức khác nhau.\n\n## Tuần 4: Trừu tượng hóa và thiết kế lớp\n\n### Bài 4.1: Trừu tượng hóa\n\n#### Mục tiêu\nXác định được những đặc điểm quan trọng của đối tượng trong bài toán.\n\n#### Nội dung\nTrừu tượng hóa tập trung vào thông tin cần thiết cho yêu cầu và ẩn bớt chi tiết không liên quan. Khi thiết kế lớp, cần xem xét dữ liệu, hành vi, trách nhiệm và mối quan hệ giữa các lớp.\n\n### Bài 4.2: Quan hệ giữa các đối tượng\n\n#### Mục tiêu\nPhân biệt liên kết, kết tập và hợp thành ở mức khái niệm.\n\n#### Nội dung\nLiên kết mô tả việc các đối tượng có quan hệ hoặc tương tác. Kết tập thể hiện quan hệ toàn thể–thành phần mà thành phần có thể tồn tại độc lập. Hợp thành thể hiện quan hệ sở hữu chặt hơn, trong đó vòng đời thành phần thường gắn với toàn thể theo mô hình thiết kế.\n\n## Tuần 5: Ngoại lệ và kiểm thử\n\n### Bài 5.1: Xử lý ngoại lệ\n\n#### Mục tiêu\nSử dụng cấu trúc xử lý lỗi để tránh chương trình kết thúc ngoài dự kiến khi có lỗi có thể dự đoán.\n\n#### Nội dung\nTrong Python, `try` và `except` cho phép xử lý một số ngoại lệ. Nên bắt loại ngoại lệ phù hợp, không che giấu lỗi bằng cách bắt mọi ngoại lệ mà không ghi nhận hoặc xử lý.\n\n### Bài 5.2: Kiểm thử lớp\n\n#### Mục tiêu\nThiết kế ca kiểm thử cho thuộc tính và phương thức.\n\n#### Nội dung\nKiểm thử lớp nên xem xét trạng thái khởi tạo, lời gọi phương thức hợp lệ, dữ liệu biên và hành vi khi nhận đầu vào không hợp lệ. Có thể kiểm thử từng lớp độc lập trước khi kiểm thử các lớp tương tác với nhau.\n\n## Tuần 6: Ôn tập và bài tập tổng hợp\n\n### Bài 6.1: Thiết kế chương trình nhỏ\n\n#### Nội dung\nMột bài tập tổng hợp có thể mô hình hóa hệ thống quản lý sinh viên với các lớp `Student`, `Course` và `Enrollment`. Cần xác định trách nhiệm của từng lớp, dữ liệu cần lưu và các phương thức để đăng ký hoặc hủy đăng ký học phần.\n\n### Bài 6.2: Ôn tập\n\n#### Nội dung\nNội dung ôn tập gồm lớp, đối tượng, thuộc tính, phương thức, đóng gói, kế thừa, đa hình, trừu tượng hóa, quan hệ giữa đối tượng, ngoại lệ và kiểm thử.",
+      "doc_id": "CS201",
+      "title": "Lập trình hướng đối tượng",
+      "source": "data/documents/CS201_object_oriented_programming.md",
+      "version": "2026-10-13",
+      "owner": "Bộ môn Khoa học máy tính",
+      "created_at": "2026-10-17T16:00:59.921653",
+      "metadata": {}
+    },
+    {
+      "content": "# Cơ sở dữ liệu (CS301)\n\nTài liệu mẫu giới thiệu các khái niệm nền tảng về mô hình dữ liệu quan hệ và SQL. Các ví dụ truy vấn dùng cú pháp SQL phổ biến; một số chi tiết có thể khác nhau giữa các hệ quản trị cơ sở dữ liệu.\n\n## Tuần 1: Khái niệm cơ sở dữ liệu\n\n### Bài 1.1: Cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu\n\n#### Mục tiêu\nPhân biệt cơ sở dữ liệu với hệ quản trị cơ sở dữ liệu (DBMS).\n\n#### Nội dung\nCơ sở dữ liệu là tập hợp dữ liệu được tổ chức để lưu trữ và truy xuất. DBMS là phần mềm hỗ trợ định nghĩa, truy vấn, cập nhật và quản lý quyền truy cập dữ liệu.\n\n### Bài 1.2: Mô hình quan hệ\n\n#### Mục tiêu\nNhận biết bảng, hàng, cột và miền giá trị.\n\n#### Nội dung\nTrong mô hình quan hệ, bảng biểu diễn một quan hệ, hàng biểu diễn bản ghi và cột biểu diễn thuộc tính. Mỗi cột có miền giá trị được xác định theo kiểu dữ liệu hoặc quy tắc của hệ thống.\n\n## Tuần 2: Khóa và ràng buộc\n\n### Bài 2.1: Khóa chính và khóa ngoại\n\n#### Mục tiêu\nGiải thích được cách khóa xác định bản ghi và biểu diễn quan hệ giữa bảng.\n\n#### Nội dung\nKhóa chính (PRIMARY KEY) xác định duy nhất mỗi hàng và không được chứa giá trị NULL. Khóa ngoại (FOREIGN KEY) tham chiếu khóa được chỉ định ở bảng khác hoặc trong cùng bảng, nhằm duy trì toàn vẹn tham chiếu theo các ràng buộc đã khai báo.\n\n### Bài 2.2: Ràng buộc dữ liệu\n\n#### Mục tiêu\nNhận biết các ràng buộc phổ biến.\n\n#### Nội dung\nCác ràng buộc thường gặp gồm `NOT NULL`, `UNIQUE`, `CHECK`, `PRIMARY KEY` và `FOREIGN KEY`. Ràng buộc giúp DBMS từ chối những thao tác vi phạm quy tắc dữ liệu đã định nghĩa.\n\n## Tuần 3: Truy vấn SQL cơ bản\n\n### Bài 3.1: SELECT, WHERE và ORDER BY\n\n#### Mục tiêu\nViết truy vấn lọc và sắp xếp dữ liệu.\n\n#### Nội dung\n`SELECT` chỉ định các cột cần trả về; `FROM` chỉ định bảng; `WHERE` lọc hàng theo điều kiện; `ORDER BY` sắp xếp kết quả.\n\n```sql\nSELECT student_id, full_name\nFROM Student\nWHERE major = 'CS'\nORDER BY full_name;\n```\n\n### Bài 3.2: Hàm tổng hợp và GROUP BY\n\n#### Mục tiêu\nTính toán thống kê trên các nhóm bản ghi.\n\n#### Nội dung\nCác hàm tổng hợp thường dùng gồm `COUNT`, `SUM`, `AVG`, `MIN` và `MAX`. `GROUP BY` gom các hàng theo một hoặc nhiều cột; `HAVING` lọc các nhóm sau khi tổng hợp.\n\n```sql\nSELECT major, COUNT(*) AS student_count\nFROM Student\nGROUP BY major;\n```\n\n## Tuần 4: Kết nối bảng và truy vấn con\n\n### Bài 4.1: JOIN\n\n#### Mục tiêu\nKết hợp dữ liệu từ nhiều bảng dựa trên điều kiện liên kết.\n\n#### Nội dung\n`INNER JOIN` trả về các hàng thỏa điều kiện nối. `LEFT JOIN` giữ tất cả hàng từ bảng bên trái và ghép dữ liệu phù hợp từ bảng bên phải; nếu không có hàng phù hợp, các cột bên phải có thể là NULL.\n\n```sql\nSELECT s.full_name, e.course_id\nFROM Student AS s\nINNER JOIN Enrollment AS e\n    ON s.student_id = e.student_id;\n```\n\n### Bài 4.2: Truy vấn con\n\n#### Mục tiêu\nSử dụng truy vấn bên trong một truy vấn khác.\n\n#### Nội dung\nTruy vấn con có thể xuất hiện trong `WHERE`, `FROM` hoặc danh sách `SELECT`, tùy loại truy vấn và hệ quản trị. Khi có thể, nên đặt bí danh rõ ràng và kiểm tra truy vấn trả về một giá trị hay nhiều hàng.\n\n## Tuần 5: Thiết kế và chuẩn hóa\n\n### Bài 5.1: Phụ thuộc hàm\n\n#### Mục tiêu\nHiểu khái niệm phụ thuộc hàm ở mức cơ bản.\n\n#### Nội dung\nPhụ thuộc hàm X → Y có nghĩa là trong quan hệ đang xét, giá trị X xác định duy nhất giá trị Y. Phân tích phụ thuộc hàm hỗ trợ xác định khóa và đánh giá thiết kế bảng.\n\n### Bài 5.2: Chuẩn hóa\n\n#### Mục tiêu\nGiải thích lý do chuẩn hóa bảng dữ liệu.\n\n#### Nội dung\nChuẩn hóa giúp giảm dư thừa và hạn chế bất thường khi thêm, sửa hoặc xóa dữ liệu. Dạng chuẩn 1NF yêu cầu các thuộc tính có giá trị nguyên tố theo mô hình quan hệ; 2NF loại bỏ phụ thuộc bộ phận của thuộc tính không khóa vào một phần khóa ghép; 3NF xử lý một số dạng phụ thuộc bắc cầu theo điều kiện xác định của dạng chuẩn.\n\n## Tuần 6: Giao dịch và ôn tập\n\n### Bài 6.1: Giao dịch và ACID\n\n#### Mục tiêu\nNêu được bốn thuộc tính ACID.\n\n#### Nội dung\nAtomicity (tính nguyên tử) yêu cầu giao dịch được thực hiện toàn bộ hoặc không thực hiện. Consistency (tính nhất quán) yêu cầu giao dịch bảo toàn các ràng buộc. Isolation (tính cô lập) điều chỉnh mức độ ảnh hưởng lẫn nhau giữa các giao dịch đồng thời. Durability (tính bền vững) yêu cầu thay đổi đã xác nhận được duy trì theo bảo đảm của hệ thống.\n\n### Bài 6.2: Ôn tập và kiểm thử truy vấn\n\n#### Nội dung\nKhi kiểm thử truy vấn, cần xem xét bảng rỗng, giá trị NULL, bản ghi trùng, trường hợp không có kết quả và dữ liệu có quan hệ khóa ngoại. Cần đọc kết quả thực tế và xác minh rằng truy vấn đáp ứng đúng yêu cầu nghiệp vụ.",
+      "doc_id": "CS301",
+      "title": "Cơ sở dữ liệu",
+      "source": "data/documents/CS301_database_systems.md",
+      "version": "2026-10-13",
+      "owner": "Bộ môn Khoa học máy tính",
+      "created_at": "2026-10-17T16:00:59.923081",
+      "metadata": {}
+    },
+    {
       "content": "# Week 1 — Lecture Notes\n\n# Week 1 — Lecture Notes (Instructor Guide)\n\n## Python Data Structures for AI\n\n> **Course:** AI Programming with Python\n> **Week:** 1 of 8 — 2 sessions/week × 4 hours (2h theory + 2h lab per session; theory total 4h/week)\n> **Prerequisites:** Python basics (variables, functions, loops, conditionals, file I/O); OOP in C++\n> **Learning Objectives:**\n> - A1.1 Select the appropriate data type (`list`, `tuple`, `dict`, `set`) for a given AI data-processing task and justify the choice.\n> - A1.2 Read and write JSON data using Python's `json` module, including custom object serialisation.\n> - A1.3 Define a `@dataclass` with type hints and default values to model structured AI data.\n> - A1.4 Transform a list of `@dataclass` instances into a JSON-serialisable dictionary.\n\n---\n\n## Session 1 — Lists, Tuples, and Dictionaries: AI Patterns\n\n> **Session format:** 4 hours total = **Part A — Theory (2h)** (this guide) + **Part B — Lab (2h)** (`lab_sheet.md`).\n\n### Session Structure\n\n| # | Segment | Duration | Gagné Event | Activity |\n|---|---|---|---|---|\n| — | **PART A — THEORY (2h)** | 0:00–2:00 | — | Segments 1–3, 5–6, 8–9, 12–13 |\n| 1 | Hook & Problem | 0:00–0:10 | 1. Gain attention | Live demo: LLM movie recommendations |\n| 2 | Objectives & Recall | 0:10–0:20 | 2–3. Objectives + Recall | State outcomes; activate prior Python knowledge |\n| 3 | Concept 1: Lists for AI | 0:20–0:45 | 4. Present content | Worked example: list of embeddings, chat messages |\n| 5 | KC 1 | 0:45–0:50 | 7. Feedback | MCQ: tuple vs list for embedding vector |\n| 6 | Concept 2: Dicts as AI Records | 0:50–1:15 | 4. Present content | Worked example: LLM API response dict |\n| — | Break | 1:15–1:20 | — | — |\n| 9 | Concept 3: Sets & Tuples | 1:20–1:40 | 4. Present content | Worked example: dedup, composite keys |\n| 12 | KC 2 | 1:40–1:45 | 8. Assess | MCQ: tuple as dict key |\n| 13 | Wrap & Reflect | 1:45–2:00 | 9. Retention/Transfer | 1-paragraph reflection; preview Session 2 |\n| — | **PART B — LAB (2h)** | 2:00–4:00 | — | Segments 4, 7, 10–11 — see `lab_sheet.md` |\n| 4 | Code Along 1 (guided) | 2:00–2:30 | 5–6. Guidance + Practice | Load, filter, sort a list of dicts from JSON (lab_sheet Ex 1.1) |\n| 7 | Code Along 2 (guided) | 2:30–2:55 | 5–6. Guidance + Practice | Parse mock API response, handle missing keys (lab_sheet Ex 1.2) |\n| 10 | Independent Lab | 2:55–3:35 | 6. Elicit performance | Product review data pipeline (lab_sheet Ex 1.3 — 40 min) |\n| 11 | Peer Review | 3:35–3:50 | 7. Feedback | Pair code review (lab_sheet Ex 1.4 — 15 min) |\n| — | Buffer / questions | 3:50–4:00 | — | — |\n\n---\n\n### 1. Hook & Problem (0:00–0:10)\n\n**Instructor script:**\n\n> \"Look at this output. I asked an LLM: 'Recommend 5 movies for someone who likes The Matrix.' Here's what it returned:\"\n>\n> ```python\n> recommendations = [\n>     {\"title\": \"Inception\", \"year\": 2010, \"genre\": \"Sci-Fi\", \"rating\": 8.8},\n>     {\"title\": \"Blade Runner 2049\", \"year\": 2017, \"genre\": \"Sci-Fi\", \"rating\": 8.0},\n>     {\"title\": \"Ghost in the Shell\", \"year\": 1995, \"genre\": \"Anime\", \"rating\": 8.0},\n>     {\"title\": \"The Thirteenth Floor\", \"year\": 1999, \"genre\": \"Sci-Fi\", \"rating\": 7.3},\n>     {\"title\": \"Dark City\", \"year\": 1998, \"genre\": \"Sci-Fi\", \"rating\": 7.6}\n> ]\n> ```\n>\n> \"Now I want to: (1) sort by rating descending, (2) filter only Sci-Fi, (3) send the top 3 to another service as JSON. **How would you store this data in Python?** \"\n>\n> \"This is not just an exercise — this exact pattern appears in every AI application. Every LLM API call returns nested dicts. Every vector database query returns lists of floats. Every RAG pipeline processes lists of document chunks. **By the end of this session, you'll be able to write this data pipeline confidently.** \"\n\n**Cognitive load note:** The hook creates a concrete mental model before any abstraction. Students see the *problem* before the *solution* (Merrill's Problem-Centered Principle).\n\n---\n\n### 2. Objectives & Recall (0:10–0:20)\n\n**State objectives:**\n\n> \"By the end of this session, you will be able to:\n> 1. Choose the right Python data type for any AI data scenario.\n> 2. Process lists of AI records (filter, sort, transform).\n> 3. Navigate nested dicts like LLM API responses.\n> 4. Use sets for deduplication and tuples for composite keys.\"\n\n**Activate prior knowledge (recall prompt):**\n\n> \"Quick recall — in Python:\n> - What's the difference between `list` and `tuple`? (mutability)\n> - When have you used `dict` before? (storing key-value pairs)\n> - What does `set` do? (unique elements, O(1) membership)\n> - How do you write a list comprehension? `[x**2 for x in range(10)]`\"\n\n**Expected student knowledge:** Students have used all four types in introductory Python. The gap is knowing *which* to use in AI-specific scenarios, not the syntax itself.\n\n---\n\n### 3. Concept 1 — Lists for AI Pipelines (0:20–0:45)\n\n#### Worked Example: AI Data as Lists\n\n**Instructor presents these three scenarios on the projector:**\n\n```python\n# Scenario 1: A list of embeddings (each is a vector of 384 floats)\nembeddings = [\n    [0.023, -0.045, 0.112, ...],  # 384 floats\n    [0.067, 0.001, -0.089, ...],\n]  # list of lists\n\n# Scenario 2: A list of chat messages\nmessages = [\n    {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n    {\"role\": \"user\", \"content\": \"What is RAG?\"},\n    {\"role\": \"assistant\", \"content\": \"RAG stands for Retrieval-Augmented Generation...\"}\n]  # list of dicts\n\n# Scenario 3: A list of document chunks\nchunks = [\n    {\"id\": \"chunk_001\", \"text\": \"Python is a programming language...\", \"tokens\": 120},\n    {\"id\": \"chunk_002\", \"text\": \"Lists are mutable sequences...\", \"tokens\": 85},\n]  # list of dicts\n```\n\n**Key insight:** \"In AI programming, almost everything is a list of something. Lists are the *container type* — what you put inside depends on the problem.\"\n\n**Worked example — list operations:**\n\n```python\n# Starting data\nreviews = [\n    {\"product\": \"Laptop\", \"rating\": 4.5, \"text\": \"Great battery life\"},\n    {\"product\": \"Mouse\",  \"rating\": 3.0, \"text\": \"Works but noisy\"},\n    {\"product\": \"Laptop\", \"rating\": 4.0, \"text\": \"Good value\"},\n    {\"product\": \"Keyboard\", \"rating\": 5.0, \"text\": \"Excellent\"},\n    {\"product\": \"Mouse\",  \"rating\": 2.0, \"text\": \"Stopped working\"},\n]\n\n# Filter: only products with rating >= 4.0\ngood_reviews = [r for r in reviews if r[\"rating\"] >= 4.0]\n# Result: [Laptop 4.5, Laptop 4.0, Keyboard 5.0]\n\n# Sort by rating descending (highest first)\nsorted_reviews = sorted(reviews, key=lambda r: r[\"rating\"], reverse=True)\n# Result: [Keyboard 5.0, Laptop 4.5, Laptop 4.0, Mouse 3.0, Mouse 2.0]\n\n# Map: extract only product names\nproducts = [r[\"product\"] for r in reviews]\n# Result: ['Laptop', 'Mouse', 'Laptop', 'Keyboard', 'Mouse']\n\n# Chain: filter → sort → extract\nresult = sorted(\n    [r for r in reviews if r[\"rating\"] >= 4.0],\n    key=lambda r: r[\"rating\"],\n    reverse=True\n)\n# Result: [Keyboard 5.0, Laptop 4.5, Laptop 4.0]\n```\n\n**Teaching tip:** Walk through each operation line by line. Show the input and output of each step. Don't assume students remember `sorted()` with `key` — many only know `.sort()`.\n\n**Cognitive load note:** This is Concept 1 (lowest intrinsic load). Students already know list syntax. The new element is *which* operations to chain and *why* — this is germane load (schema building), not extraneous.\n\n---\n\n### 4. Code Along 1 — Load, Filter, Sort a List of Dicts (2:00–2:30) [PART B — LAB]\n\n**Instructor writes this code line by line. Students type along.**\n\n```python\nimport json\n\n# Step 1: Load data from a JSON file\nwith open(\"data/reviews.json\", \"r\") as f:\n    reviews = json.load(f)\n\nprint(f\"Loaded {len(reviews)} reviews\")\n\n# Step 2: Filter — only reviews with text\nwith_text = [r for r in reviews if r.get(\"text\")]\nprint(f\"Reviews with text: {len(with_text)}\")\n\n# Step 3: Sort by rating (descending)\ntop_rated = sorted(with_text, key=lambda r: r[\"rating\"], reverse=True)\n\n# Step 4: Show top 3\nprint(\"Top 3 reviews:\")\nfor r in top_rated[:3]:\n    print(f\"  {r['product']}: {r['rating']} — {r['text'][:50]}...\")\n\n# Step 5: Save filtered results\nwith open(\"data/top_reviews.json\", \"w\") as f:\n    json.dump(top_rated[:5], f, indent=2)\n```\n\n**Common mistakes to watch for:**\n\n| Mistake | Correction |\n|---|---|\n| `r[\"text\"]` on missing key → KeyError | Use `r.get(\"text\", \"\")` |\n| `reviews.sort()` on loaded JSON (list of dicts) | `sorted()` returns new list; `.sort()` sorts in-place |\n| `json.dump()` without `indent=2` → unreadable one-liner | Always use `indent=2` for debugging |\n| Forgetting `f.close()` → use `with open(...)` | Context manager handles it |\n\n**Check for understanding:** \"Pause. Everyone should see 'Loaded N reviews' printed. If not, raise your hand.\"\n\n---\n\n### 5. Knowledge Check 1 (0:45–0:50)\n\n**MCQ — Project on screen:**\n\n> You are storing an embedding vector — 384 floating-point numbers — that represents the semantic meaning of a sentence. This vector will never change after creation.\n>\n> **Which data type should you use?**\n>\n> (a) `list` — [0.023, -0.045, 0.112, ...]\n> (b) `tuple` — (0.023, -0.045, 0.112, ...)\n> (c) `set` — {0.023, -0.045, 0.112, ...}\n\n**Correct answer: (b) tuple**\n\n**Justification:** The vector is *fixed-length* and *immutable* — it never changes. `tuple` guarantees immutability, which prevents accidental modification and allows the vector to be used as a dict key or stored in a `set`. A `list` would work but signals \"this might change\" to other developers. A `set` discards duplicates and has no ordering, which is wrong for a vector.\n\n**Pitfall note (for instructor):** Many students will choose `list` because they're more familiar with it. Use this teachable moment to discuss *semantic intent*: \"list says 'this is a sequence that may change'; tuple says 'this is a fixed record.' AI embeddings are fixed records.\"\n\n---\n\n### 6. Concept 2 — Dicts as AI Records (0:50–1:15)\n\n#### Worked Example: LLM API Response\n\n**Show this real (simplified) OpenAI API response:**\n\n```python\nresponse = {\n    \"id\": \"chatcmpl-9a8b7c6d5e\",\n    \"object\": \"chat.completion\",\n    \"created\": 1712345678,\n    \"model\": \"gpt-4o-mini\",\n    \"choices\": [\n        {\n            \"index\": 0,\n            \"message\": {\n                \"role\": \"assistant\",\n                \"content\": \"RAG stands for Retrieval-Augmented Generation. It's a technique...\"\n            },\n            \"finish_reason\": \"stop\"\n        }\n    ],\n    \"usage\": {\n        \"prompt_tokens\": 45,\n        \"completion_tokens\": 120,\n        \"total_tokens\": 165\n    }\n}\n```\n\n**Key insight:** \"This nested dict structure is the *universal interface* to every AI API on the planet. Learn to navigate it, and you can use any AI service.\"\n\n**Worked example — dict navigation:**\n\n```python\n# Safe access with .get()\ncontent = response.get(\"choices\", [{}])[0].get(\"message\", {}).get(\"content\", \"\")\nprint(content)\n\n# Extract specific fields\nmodel = response[\"model\"]\ntokens = response[\"usage\"][\"total_tokens\"]\nfinish = response[\"choices\"][0][\"finish_reason\"]\n\nprint(f\"Model: {model}\")\nprint(f\"Tokens: {tokens}\")\nprint(f\"Finish reason: {finish}\")\n\n# Dict merging (useful for combining configs)\ndefault_config = {\"temperature\": 0.7, \"max_tokens\": 1000}\nuser_config = {\"temperature\": 0.0}\nfinal_config = {**default_config, **user_config}\n# Result: {\"temperature\": 0.0, \"max_tokens\": 1000}\n# Note: user_config.temperature overrides default_config.temperature\n```\n\n**Teaching tip:** The `[{}]` fallback pattern (`response.get(\"choices\", [{}])`) is a professional idiom. Explain: \"If 'choices' is missing, we get a list with one empty dict, so the next `.get()` still works instead of crashing.\"\n\n**Alternative pattern (Python 3.9+):**\n\n```python\n# Using the merge operator |=\ndefault_config = {\"temperature\": 0.7, \"max_tokens\": 1000}\nuser_config = {\"temperature\": 0.0}\nfinal_config = default_config | user_config  # Python 3.9+\n```\n\n---\n\n### 7. Code Along 2 — Parse Mock API Response (2:30–2:55) [PART B — LAB]\n\n```python\nimport json\nfrom datetime import datetime\n\n# Mock API response (simulating what OpenAI returns)\nmock_response = {\n    \"id\": \"chatcmpl-mock-001\",\n    \"object\": \"chat.completion\",\n    \"created\": int(datetime.now().timestamp()),\n    \"model\": \"gpt-4o-mini\",\n    \"choices\": [\n        {\n            \"index\": 0,\n            \"message\": {\n                \"role\": \"assistant\",\n                \"content\": \"Hello! I'm an AI assistant. How can I help you today?\"\n            },\n            \"finish_reason\": \"stop\"\n        }\n    ],\n    \"usage\": {\n        \"prompt_tokens\": 25,\n        \"completion_tokens\": 15,\n        \"total_tokens\": 40\n    }\n}\n\n# Task 1: Extract the assistant's message\ndef extract_content(response):\n    \"\"\"Safely extract the assistant's message content.\"\"\"\n    choices = response.get(\"choices\", [])\n    if not choices:\n        return \"No response\"\n    message = choices[0].get(\"message\", {})\n    return message.get(\"content\", \"Empty message\")\n\n# Task 2: Extract token usage\ndef extract_usage(response):\n    \"\"\"Extract and print token usage statistics.\"\"\"\n    usage = response.get(\"usage\", {})\n    return {\n        \"prompt\": usage.get(\"prompt_tokens\", 0),\n        \"completion\": usage.get(\"completion_tokens\", 0),\n        \"total\": usage.get(\"total_tokens\", 0)\n    }\n\n# Task 3: Handle missing keys gracefully\ndef safe_extract(response, key, default=None):\n    \"\"\"Safely extract a nested value using dot-notation path.\"\"\"\n    keys = key.split(\".\")\n    current = response\n    for k in keys:\n        if isinstance(current, dict):\n            current = current.get(k)\n        else:\n            return default\n    return current if current is not None else default\n\n# Test the functions\nprint(\"Message:\", extract_content(mock_response))\nprint(\"Usage:\", extract_usage(mock_response))\nprint(\"Safe 'choices.0.message.content':\",\n      safe_extract(mock_response, \"choices.0.message.content\"))\nprint(\"Safe 'choices.0.message.nonexistent':\",\n      safe_extract(mock_response, \"choices.0.message.nonexistent\"))\nprint(\"Safe 'missing.path':\",\n      safe_extract(mock_response, \"missing.path\"))\n```\n\n**Common mistakes to watch for:**\n\n| Mistake | Correction |\n|---|---|\n| `response[\"choices\"][0]` without checking if list is empty | Always check `if choices:` first |\n| Assuming `finish_reason` is always `\"stop\"` | Could be `\"length\"`, `\"content_filter\"`, `\"null\"` |\n| Hard-coding key paths | Use parameterised `safe_extract` pattern |\n\n---\n\n### 8. Break (1:15–1:20)\n\n**Instructor tip:** Walk around during the break and answer individual questions.\n\n---\n\n### 9. Concept 3 — Sets & Tuples for AI Workflows (1:20–1:40)\n\n#### Worked Example: Deduplication with Sets\n\n```python\n# Scenario: You have a list of document IDs from multiple sources\n# Some IDs appear more than once — you need unique ones\n\ndoc_ids = [\"doc_001\", \"doc_002\", \"doc_001\", \"doc_003\", \"doc_002\", \"doc_004\"]\n\n# Inefficient O(n²) approach\nunique = []\nfor id_ in doc_ids:\n    if id_ not in unique:\n        unique.append(id_)\n\n# Efficient O(n) approach using set\nunique = list(set(doc_ids))\nprint(unique)  # ['doc_001', 'doc_002', 'doc_003', 'doc_004']\n\n# Preserving order (Python 3.7+ dicts preserve insertion order)\nunique_ordered = list(dict.fromkeys(doc_ids))\nprint(unique_ordered)  # ['doc_001', 'doc_002', 'doc_003', 'doc_004']\n```\n\n**Key insight:** \"`set` gives you O(1) membership testing. For 10,000 items, `if x in set` is instant; `if x in list` takes 10,000 comparisons.\"\n\n#### Worked Example: Tuples as Composite Keys\n\n```python\n# Scenario: You need to cache search results per (user_id, session_id)\n# A dict key must be immutable — tuples work perfectly\n\ncache = {}\n\n# Composite key: (user_id, session_id)\nkey = (\"user_42\", \"session_abc123\")\ncache[key] = {\"query\": \"What is RAG?\", \"result\": \"RAG stands for...\"}\n\n# Retrieve\nresult = cache.get((\"user_42\", \"session_abc123\"))\nprint(result)  # {'query': 'What is RAG?', 'result': 'RAG stands for...'}\n\n# List of tuples as a structured dataset\ntop_products = [\n    (\"Laptop\", 4.5, 120),\n    (\"Keyboard\", 4.2, 85),\n    (\"Mouse\", 3.8, 200),\n]\n\n# Unpacking tuples\nfor product, rating, count in top_products:\n    print(f\"{product}: {rating} ({count} reviews)\")\n```\n\n**Key insight:** \"Use tuples when the data structure is *fixed* — a record with a known number of fields. Tuples are the lightest way to group related data without defining a class.\"\n\n---\n\n### 10. Independent Lab — Data Pipeline (2:55–3:35) [PART B — LAB]\n\nStudents work independently. See `lab_sheet.md` for full instructions.\n\n**Task card (project on screen so students don't switch documents):**\n> 1. Load `data/reviews.json`.\n> 2. Deduplicate by `review_id` (use a `set`, keep first occurrence).\n> 3. Filter out reviews with empty `text`.\n> 4. Top 5 products by average rating → `(product, avg_rating)` tuples.\n> 5. Save to `data/top_5_products.json`.\n\n**Setup checklist (before class):**\n- [ ] Create `data/reviews.json` with 20+ mock product reviews (see `lab_sheet.md` for content)\n- [ ] Verify the file is accessible from student machines\n- [ ] Test the solution yourself\n\n**Teaching tips during lab:**\n- Circulate. Look for students who are stuck on the first step.\n- Common blocker: \"I can't find the file\" → check working directory, use absolute path\n- Common blocker: \"My sort is wrong\" → `reverse=True` for descending\n- Bonus: \"What if two products have the same average rating?\" → sort by name as tiebreaker\n\n---\n\n### 11. Peer Review (3:35–3:50) [PART B — LAB]\n\n**Pair up students. Review checklist (project on screen):**\n\n> **Code Review Checklist:**\n> 1. Does the deduplication work? (run with duplicate review_ids)\n> 2. Are edge cases handled? (empty file, missing fields)\n> 3. Is the code readable? (variable names, comments)\n> 4. Does the output match the expected format?\n\n**2 min per person, then swap.**\n\n---\n\n### 12. Knowledge Check 2 (1:40–1:45)\n\n**MCQ:**\n\n> You're building a cache that maps `(user_id, session_id)` to session data. The cache must be fast and the keys must never change.\n>\n> **Which type should you use for the key?**\n>\n> Please explain your answer in one sentence.\n\n**Expected answer: `tuple` — `(\"user_42\", \"session_abc\")`**\n\n**Explanation:** Tuples are immutable (can be used as dict keys) and hashable (O(1) lookup). Lists are mutable and unhashable — they would raise `TypeError: unhashable type: 'list'`.\n\n---\n\n### 13. Wrap & Reflect (1:45–2:00)\n\n**Instructor summary:**\n\n> \"Today we covered the four fundamental data types for AI programming:\n> - **Lists** for sequences (embeddings, messages, chunks)\n> - **Dicts** for records (API responses, configs, metadata)\n> - **Sets** for uniqueness (deduplication, membership testing)\n> - **Tuples** for fixed composite keys and lightweight records\n>\n> In Session 2, we'll take this further: JSON serialisation, @dataclass (the Pythonic way to model AI data), and type hints. You'll build a proper data model for a RAG document chunk.\"\n\n**Reflection prompt (students write 1 paragraph, 3 min):**\n\n> \"What was the most useful thing you learned today? What confused you? Write 3–5 sentences.\"\n\n**Collect reflections** — use them to adjust Session 2 pace.\n\n**Optional — elaborative interrogation:** Run prompts P1–P4 from `elaborative_prompts.md` as the opener of the Part B lab session (first 15–20 min, before Code Along 1) or as homework; alternatively use them as the recall opener of Session 2.\n\n---\n\n## Session 2 — JSON, @dataclass, and Type Hints\n\n> **Session format:** 4 hours total = **Part A — Theory (2h)** (this guide) + **Part B — Lab (2h)** (`lab_sheet.md`).\n\n### Session Structure\n\n| # | Segment | Duration | Gagné Event | Activity |\n|---|---|---|---|---|\n| — | **PART A — THEORY (2h)** | 0:00–2:00 | — | Segments 1–3, 5–6, 10–11, 14–15 |\n| 1 | Hook | 0:00–0:10 | 1. Gain attention | Raw JSON → clean Python objects |\n| 2 | Objectives & Recall | 0:10–0:20 | 2–3. Objectives + Recall | Recap Session 1 dicts |\n| 3 | Concept 1: JSON in AI | 0:20–0:45 | 4. Present content | Worked example: json.loads/dumps, custom serialisation |\n| 5 | KC 1 | 0:45–0:50 | 7. Feedback | MCQ: json.dumps on datetime |\n| 6 | Concept 2: @dataclass | 0:50–1:15 | 4. Present content | Worked example: Document, ChatMessage |\n| — | Break | 1:15–1:20 | — | — |\n| 11 | Concept 3: Type Hints | 1:20–1:40 | 4. Present content | Function signatures; TypedDict (optional/enrichment) |\n| 14 | KC 2 | 1:40–1:45 | 8. Assess | MCQ: @dataclass decorator |\n| 15 | Wrap & Reflect | 1:45–2:00 | 9. Retention/Transfer | Preview Week 2 |\n| — | **PART B — LAB (2h)** | 2:00–4:00 | — | Segments 4, 7–9, 12–13 — see `lab_sheet.md` |\n| 4 | Code Along 1 (guided) | 2:00–2:30 | 5–6. Guidance + Practice | Read JSON file, filter, write back (lab_sheet Ex 2.1) |\n| 7 | Code Along 2a (guided) | 2:30–2:45 | 5–6. Guidance + Practice | EmbeddingResult dataclass + asdict + json.dump (lab_sheet Ex 2.2) |\n| 8 | Stretch Break | 2:45–2:50 | — | 5-min stretch, hydrate |\n| 9 | Code Along 2b (mini-demo) | 2:50–3:05 | 5–6. Guidance + Practice | Custom JSON encoder for @dataclass |\n| 12 | Independent Lab | 3:05–3:45 | 6. Elicit performance | DocumentChunk model + JSON round-trip (lab_sheet Ex 2.3 — 40 min) |\n| 13 | Peer Review | 3:45–4:00 | 7. Feedback | Pair code review (lab_sheet Ex 2.4 — 15 min) |\n\n---\n\n### 1. Hook — Raw JSON → Clean Objects (0:00–0:10)\n\n**Instructor script:**\n\n> \"This is the actual response from the OpenAI API. Look at this raw JSON:\"\n>\n> ```json\n> {\n>   \"id\": \"chatcmpl-AbCdEf123456\",\n>   \"object\": \"chat.completion\",\n>   \"created\": 1712345678,\n>   \"model\": \"gpt-4o-mini\",\n>   \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"Hello!\"}, \"finish_reason\": \"stop\"}],\n>   \"usage\": {\"prompt_tokens\": 10, \"completion_tokens\": 5, \"total_tokens\": 15}\n> }\n> ```\n>\n> \"Working with raw dicts is error-prone. You have to remember key names, handle missing keys manually, and your IDE gives you no autocomplete. What if we could convert this to a clean Python object — with attributes, autocomplete, and validation?\n>\n> \"That's what `@dataclass` does. In this session, you'll learn to convert messy JSON into clean, type-safe Python objects. Every AI developer does this every day.\"\n\n---\n\n### 2. Objectives & Recall (0:10–0:20)\n\n**State objectives:**\n\n> \"By the end of this session, you will be able to:\n> 1. Read and write JSON with custom serialisation.\n> 2. Define a `@dataclass` to model AI data structures.\n> 3. Use type hints to make your AI code self-documenting.\n> 4. Convert between `@dataclass` instances and JSON.\"\n\n**Recall prompt:**\n\n> \"From Session 1: How do you access a nested dict value? What's the problem with using bare dicts everywhere in a large codebase? (No autocomplete, no validation, manual key management.)\"\n\n---\n\n### 3. Concept 1 — JSON in AI Workflows (0:20–0:45)\n\n#### Worked Example: JSON Serialisation\n\n```python\nimport json\nfrom datetime import datetime\n\n# Basic serialisation\ndata = {\n    \"name\": \"AI Assistant\",\n    \"version\": 2.0,\n    \"features\": [\"chat\", \"search\", \"code\"],\n    \"is_active\": True,\n    \"metadata\": None\n}\n\n# Serialise to JSON string\njson_str = json.dumps(data, indent=2)\nprint(json_str)\n\n# Write to file\nwith open(\"config.json\", \"w\") as f:\n    json.dump(data, f, indent=2)\n\n# Read from file\nwith open(\"config.json\", \"r\") as f:\n    loaded = json.load(f)\n\nprint(loaded[\"name\"])  # AI Assistant\n```\n\n#### Custom Serialisation — The Problem\n\n```python\n# This will FAIL\ndata_with_date = {\n    \"name\": \"Chat Log\",\n    \"created_at\": datetime.now(),\n    \"messages\": 5\n}\n\n# json.dumps(data_with_date)  # TypeError: Object of type datetime is not JSON serialisable\n```\n\n**Worked Example — Custom Encoder:**\n\n```python\nfrom datetime import datetime\nimport json\n\nclass CustomEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat()  # Convert datetime to ISO 8601 string\n        if isinstance(obj, set):\n            return list(obj)  # Convert set to list\n        return super().default(obj)  # Fallback to default\n\ndata = {\n    \"name\": \"Chat Log\",\n    \"created_at\": datetime.now(),\n    \"tags\": {\"urgent\", \"follow-up\"}  # set\n}\n\njson_str = json.dumps(data, cls=CustomEncoder, indent=2)\nprint(json_str)\n```\n\n**Key insight:** \"JSON has 6 types (string, number, boolean, null, object, array). Python has many more (datetime, set, Decimal, etc.). When you encounter a non-serialisable type, you write a custom encoder — or you convert to a serialisable type first.\"\n\n---\n\n### 4. Code Along 1 — Read, Filter, Write JSON (2:00–2:30) [PART B — LAB]\n\n```python\nimport json\nfrom datetime import datetime\n\n# Step 1: Read a JSON file\nwith open(\"data/chat_messages.json\", \"r\") as f:\n    messages = json.load(f)\n\nprint(f\"Loaded {len(messages)} messages\")\n\n# Step 2: Filter — only assistant messages\nassistant_msgs = [m for m in messages if m.get(\"role\") == \"assistant\"]\nprint(f\"Assistant messages: {len(assistant_msgs)}\")\n\n# Step 3: Pretty-print a single message\nfor msg in assistant_msgs[:2]:\n    print(f\"[{msg['role']}] {msg['content'][:60]}...\")\n\n# Step 4: Write filtered results back to JSON\nwith open(\"data/assistant_messages.json\", \"w\") as f:\n    json.dump(assistant_msgs, f, indent=2)\n\n# Step 5: Read it back and verify\nwith open(\"data/assistant_messages.json\", \"r\") as f:\n    verified = json.load(f)\nprint(f\"Verified: {len(verified)} messages saved\")\n```\n\n---\n\n### 5. Knowledge Check 1 (0:45–0:50)\n\n**MCQ:**\n\n> You call `json.dumps()` on a Python `datetime` object. What happens?\n>\n> (a) It works — `datetime` is automatically serialised.\n> (b) TypeError — `datetime` is not JSON serialisable by default.\n> (c) It auto-converts to a Unix timestamp.\n\n**Correct answer: (b) TypeError**\n\n**Explanation:** Python's `datetime` has no default JSON representation. You must provide a custom encoder (or convert to string first). This is a common gotcha that students will encounter repeatedly when logging AI API calls with timestamps.\n\n---\n\n### 6. Concept 2 — @dataclass for AI Models (0:50–1:15)\n\n#### The Problem: Manual Class Boilerplate\n\n```python\nclass Document:\n    def __init__(self, content, metadata, doc_id):\n        self.content = content\n        self.metadata = metadata\n        self.doc_id = doc_id\n\n    def __repr__(self):\n        return f\"Document(content={self.content[:20]}..., doc_id={self.doc_id})\"\n\n    def __eq__(self, other):\n        if not isinstance(other, Document):\n            return False\n        return self.doc_id == other.doc_id\n\n# That's a lot of code for a simple data container\n```\n\n#### The Solution: @dataclass\n\n```python\nfrom dataclasses import dataclass, field\nfrom datetime import datetime\nfrom typing import Optional\n\n@dataclass\nclass Document:\n    \"\"\"A document to be indexed and searched.\"\"\"\n    content: str\n    metadata: dict = field(default_factory=dict)\n    doc_id: str = \"\"\n    created_at: datetime = field(default_factory=datetime.now)\n\n@dataclass\nclass ChatMessage:\n    \"\"\"A single message in a chat conversation.\"\"\"\n    role: str          # \"system\", \"user\", \"assistant\"\n    content: str\n    timestamp: datetime = field(default_factory=datetime.now)\n    token_count: int = 0\n```\n\n**@dataclass auto-generates:** `__init__`, `__repr__`, `__eq__`, `__hash__` (if frozen)\n\n**Key insight:** \"`@dataclass` is the standard way to model AI data in Python. It replaces the Session 1 pattern of 'dict with string keys' with a proper typed object. Your IDE now knows `doc.content` is a string, `doc.doc_id` is a string, and `doc.metadata` is a dict.\"\n\n#### Important: Mutable Defaults\n\n```python\nfrom dataclasses import dataclass, field\n\n# WRONG — @dataclass rejects this at class definition:\n# ValueError: mutable default <class 'list'> for field tags is not allowed\n# (The danger it prevents: all instances would share the same list.)\n@dataclass\nclass BadExample:\n    tags: list = []  # Don't do this!\n\n# RIGHT — each instance gets a new list\n@dataclass\nclass GoodExample:\n    tags: list = field(default_factory=list)\n```\n\n**Teaching tip:** Run the `BadExample` class definition live — `@dataclass` refuses it outright with `ValueError: mutable default <class 'list'> for field tags is not allowed: use default_factory`. This is Python protecting you: the default `[]` is evaluated ONCE at class-definition time, so if it were allowed, every instance would share the same list object. To show the actual bug the ValueError prevents, demo it with a plain class instead:\n\n```python\nclass Shared:\n    tags = []          # class attribute — evaluated once, shared by all\n    def add(self, tag):\n        self.tags.append(tag)\n\na, b = Shared(), Shared()\na.add(\"urgent\")\nprint(b.tags)  # ['urgent'] — b sees a's tag!\n```\n\nThen show the fix: `field(default_factory=list)` runs a fresh factory per instance, so each object gets its own list.\n\n---\n\n### 7. Code Along 2a — EmbeddingResult + JSON Dump (2:30–2:45) [PART B — LAB]\n\n**Instructor writes this code line by line. Students type along.** Build the dataclass first; the custom encoder comes in the next segment.\n\n```python\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime\nimport json\n\n@dataclass\nclass EmbeddingResult:\n    \"\"\"The result of embedding a text with an embedding model.\"\"\"\n    vector: list[float]          # The embedding vector (e.g., 384 floats)\n    model: str = \"text-embedding-3-small\"\n    token_count: int = 0\n    created_at: datetime = field(default_factory=datetime.now)\n    text: str = \"\"\n\n# Create instances\nresult1 = EmbeddingResult(\n    vector=[0.023, -0.045, 0.112, 0.067],\n    model=\"text-embedding-3-small\",\n    token_count=10,\n    text=\"What is RAG?\"\n)\n\nresult2 = EmbeddingResult(\n    vector=[0.089, 0.001, -0.034, 0.055],\n    model=\"text-embedding-3-small\",\n    token_count=8,\n    text=\"Python programming\"\n)\n\n# Convert instances to plain dicts with asdict\nresults = [asdict(result1), asdict(result2)]\n\n# Now try serialising — this FAILS:\n# json_str = json.dumps(results, indent=2)\n# TypeError: Object of type datetime is not JSON serialisable\n```\n\n**Check for understanding:** \"Pause. Everyone should have two `EmbeddingResult` instances and see the `asdict` output. What happens if we call `json.dumps` directly? (TypeError — datetime again.) That's the problem we solve next.\"\n\n---\n\n### 8. Stretch Break (2:45–2:50) [PART B — LAB]\n\n**Instructor tip:** 5-minute stretch and hydrate between Code Along 2a and 2b — resets attention before the encoder demo.\n\n---\n\n### 9. Code Along 2b — Custom JSON Encoder (Mini-Demo, 2:50–3:05) [PART B — LAB]\n\n**Instructor demonstrates; students can type along or watch.** Builds on the working dataclass from Code Along 2a — paste it above if you're in a new file.\n\n```python\nfrom dataclasses import dataclass, field, asdict\nfrom datetime import datetime\nimport json\n\n# Reuse the EmbeddingResult dataclass from Code Along 2a\n@dataclass\nclass EmbeddingResult:\n    \"\"\"The result of embedding a text with an embedding model.\"\"\"\n    vector: list[float]\n    model: str = \"text-embedding-3-small\"\n    token_count: int = 0\n    created_at: datetime = field(default_factory=datetime.now)\n    text: str = \"\"\n\n# Custom JSON encoder for @dataclass\nclass DataclassEncoder(json.JSONEncoder):\n    def default(self, obj):\n        if isinstance(obj, datetime):\n            return obj.isoformat()\n        if hasattr(obj, '__dataclass_fields__'):\n            return asdict(obj)\n        return super().default(obj)\n\n# Serialise to JSON\nresult1 = EmbeddingResult(vector=[0.023, -0.045, 0.112, 0.067], token_count=10, text=\"What is RAG?\")\nresult2 = EmbeddingResult(vector=[0.089, 0.001, -0.034, 0.055], token_count=8, text=\"Python programming\")\nresults = [result1, result2]\njson_str = json.dumps(results, cls=DataclassEncoder, indent=2)\nprint(json_str)\n\n# Save to file\nwith open(\"data/embeddings.json\", \"w\") as f:\n    json.dump(results, f, cls=DataclassEncoder, indent=2)\n```\n\n**Expected output:**\n\n```json\n[\n  {\n    \"vector\": [0.023, -0.045, 0.112, 0.067],\n    \"model\": \"text-embedding-3-small\",\n    \"token_count\": 10,\n    \"created_at\": \"2026-08-04T10:30:00\",\n    \"text\": \"What is RAG?\"\n  },\n  {\n    \"vector\": [0.089, 0.001, -0.034, 0.055],\n    \"model\": \"text-embedding-3-small\",\n    \"token_count\": 8,\n    \"created_at\": \"2026-08-04T10:30:01\",\n    \"text\": \"Python programming\"\n  }\n]\n```\n\n**Teaching tip:** Anchor the encoder to Concept 1's `CustomEncoder`: `json.dumps` calls `default()` whenever it meets a type it doesn't know. `isinstance` handles `datetime` → ISO string, `asdict` converts dataclasses → dicts, `super().default(obj)` is the fallback. Same structure, one new branch.\n\n---\n\n### 10. Break (1:15–1:20)\n\n---\n\n### 11. Concept 3 — Type Hints for AI Code (1:20–1:40)\n\n#### Worked Example: Annotated Functions\n\n```python\nfrom __future__ import annotations  # must be the first line of the file\n\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass Document:\n    content: str\n    metadata: dict = field(default_factory=dict)\n    doc_id: str = \"\"\n\n# Type hints on function signatures\ndef search_documents(\n    query: str,\n    top_k: int = 5,\n    min_score: float = 0.7,\n    filter_by: dict | None = None\n) -> list[tuple[Document, float]]:\n    \"\"\"Search documents and return (document, score) pairs.\"\"\"\n    # ... implementation\n    results: list[tuple[Document, float]] = []\n    return results\n\ndef process_messages(\n    messages: list[dict[str, str]]\n) -> dict[str, int]:\n    \"\"\"Count messages by role. Returns {'user': 3, 'assistant': 5}.\"\"\"\n    counts: dict[str, int] = {}\n    for msg in messages:\n        role = msg.get(\"role\", \"unknown\")\n        counts[role] = counts.get(role, 0) + 1\n    return counts\n```\n\n**Teaching tip:** This example uses the builtin generic style (`list[...]`, `dict[...]`, `tuple[...]`) with `from __future__ import annotations` — the same style as Code Along 2a. Keep one style across the course; the older `typing.List[...]` form still works but mixes two conventions for no benefit.\n\n#### TypedDict for API Response Shapes (optional / enrichment)\n\n```python\nfrom typing import TypedDict, Any\n\nclass ChatCompletionResponse(TypedDict):\n    \"\"\"Shape of the OpenAI chat completion response.\"\"\"\n    id: str\n    model: str\n    choices: list[dict[str, Any]]\n    usage: dict[str, int]\n\nclass Message(TypedDict):\n    role: str\n    content: str\n\nclass ChatCompletionChoice(TypedDict):\n    index: int\n    message: Message\n    finish_reason: str\n```\n\n**Optional:** `TypedDict` is not required for the labs — it models the same shapes as `@dataclass`. If the session is running long, skip this block and mention it as a \"read on your own\" topic.\n\n**Key insight:** \"Type hints are not enforced at runtime — they're for *humans and tools*. Your IDE uses them for autocomplete, type checkers (mypy, pyright) catch bugs before runtime, and future developers (including you in 6 months) can understand the code without reading the implementation.\"\n\n---\n\n### 12. Independent Lab — Data Model Design (3:05–3:45) [PART B — LAB]\n\nSee `lab_sheet.md` for full instructions.\n\n**Task card (project on screen so students don't switch documents):**\n> 1. Define `DocumentChunk` @dataclass — `embedding: list[float] | None`.\n> 2. Read `data/document_chunks.json` → convert each dict to a `DocumentChunk`.\n> 3. Print all chunks where `embedding` is `None`.\n> 4. Add `char_count` from `len(content)`.\n> 5. Serialise back to JSON with `DataclassEncoder` → `data/document_chunks_updated.json`.\n\n**Setup checklist:**\n- [ ] Create `data/document_chunks.json` with 5+ mock chunks (see `lab_sheet.md`)\n- [ ] Test the solution\n\n**Common issues to watch for:**\n- `embedding: list[float] | None` — students may forget to import `from __future__ import annotations` or use `Optional[list[float]]`\n- Mutable defaults: `chunks: list = []` — must use `field(default_factory=list)`\n- JSON deserialisation: `json.load()` returns dicts, not @dataclass instances — they must convert manually\n\n---\n\n### 13. Peer Review (3:45–4:00) [PART B — LAB]\n\n**Checklist on screen:**\n\n> 1. Are mutable defaults handled with `field(default_factory=...)`?\n> 2. Is `None` used properly for optional embedding (not `[]` or `0`)?\n> 3. Does the JSON round-trip work? (load → modify → save → load)\n> 4. Are type hints present on all fields?\n\n---\n\n### 14. Knowledge Check 2 (1:40–1:45)\n\n**MCQ:**\n\n> Which decorator automatically generates `__init__`, `__repr__`, and `__eq__` for a class?\n>\n> (a) `@staticmethod`\n> (b) `@dataclass`\n> (c) `@property`\n\n**Correct answer: (b) @dataclass**\n\n**Explanation:** `@dataclass` generates the boilerplate for data-holding classes. `@staticmethod` defines a static method. `@property` creates a getter/setter for an attribute.\n\n---\n\n### 15. Wrap & Reflect (1:45–2:00)\n\n**Instructor summary:**\n\n> \"This week you built the foundation for everything that follows:\n> - **Session 1:** You can process AI data with lists, dicts, sets, and tuples.\n> - **Session 2:** You can model AI data with @dataclass, serialise to JSON, and add type hints.\n>\n> Next week: we send this data to an LLM API and get responses back. You'll use your @dataclass skills to model the API request/response, your JSON skills to serialise/deserialise, and your dict skills to navigate the response.\n>\n> **Everything connects.** \"\n\n**Reflection prompt (3 min):**\n\n> \"What's the one thing from today that you'll use most in your AI programming? What's still unclear? Write 3–5 sentences.\"\n\n**Preview Lab 1 (due before Session 3):** \"Your homework is to build a `ProductReview` @dataclass and a data pipeline — combining everything from both sessions. It's in the lab sheet.\"\n\n**Optional — elaborative interrogation:** Run prompts P5–P8 and connection prompts C1–C3 from `elaborative_prompts.md` as the opener of the Part B lab session or as homework before Lab 1 (15–20 min, individual → pairs → class share).\n\n---\n\n## Instructor Preparation Checklist\n\n### Before Session 1\n\n- [ ] Prepare demo: show LLM movie recommendations (in Hook)\n- [ ] Create `data/reviews.json` with 20+ mock reviews\n- [ ] Test all Code Along scripts\n- [ ] Test the Independent Lab solution\n- [ ] Prepare KC slides (3-option MCQs)\n- [ ] Ensure Python 3.11+ is installed on all machines\n- [ ] Ensure `pip install` is working (no extra packages needed for Week 1)\n\n### Before Session 2\n\n- [ ] Create `data/chat_messages.json` with 10+ mock messages\n- [ ] Create `data/document_chunks.json` with 5+ mock chunks\n- [ ] Test all Code Along scripts\n- [ ] Test the Independent Lab solution\n- [ ] Review Session 1 reflections to adjust pace\n\n### Sample Data Files\n\n#### `data/reviews.json` (for Session 1 Lab)\n\n```json\n[\n  {\"review_id\": \"R001\", \"product\": \"Laptop\", \"rating\": 5, \"text\": \"Excellent performance\"},\n  {\"review_id\": \"R002\", \"product\": \"Mouse\", \"rating\": 3, \"text\": \"Works but noisy\"},\n  {\"review_id\": \"R003\", \"product\": \"Keyboard\", \"rating\": 4, \"text\": \"Good feel\"},\n  {\"review_id\": \"R004\", \"product\": \"Laptop\", \"rating\": 4, \"text\": \"Good battery life\"},\n  {\"review_id\": \"R005\", \"product\": \"Monitor\", \"rating\": 5, \"text\": \"Crystal clear display\"},\n  {\"review_id\": \"R001\", \"product\": \"Laptop\", \"rating\": 5, \"text\": \"Excellent performance\"},\n  {\"review_id\": \"R006\", \"product\": \"Mouse\", \"rating\": 2, \"text\": \"Stopped after 1 month\"},\n  {\"review_id\": \"R007\", \"product\": \"Keyboard\", \"rating\": 5, \"text\": \"Love the mechanical switches\"},\n  {\"review_id\": \"R008\", \"product\": \"Monitor\", \"rating\": 4, \"text\": \"Good value for money\"},\n  {\"review_id\": \"R009\", \"product\": \"Laptop\", \"rating\": 3, \"text\": \"\"},\n  {\"review_id\": \"R010\", \"product\": \"Mouse\", \"rating\": 4, \"text\": \"Comfortable grip\"},\n  {\"review_id\": \"R011\", \"product\": \"Headphones\", \"rating\": 5, \"text\": \"Amazing sound quality\"},\n  {\"review_id\": \"R012\", \"product\": \"Headphones\", \"rating\": 3, \"text\": \"Average noise cancelling\"},\n  {\"review_id\": \"R013\", \"product\": \"Laptop\", \"rating\": 2, \"text\": \"Overheats quickly\"},\n  {\"review_id\": \"R014\", \"product\": \"Keyboard\", \"rating\": 4, \"text\": \"Nice RGB lighting\"},\n  {\"review_id\": \"R015\", \"product\": \"Monitor\", \"rating\": 3, \"text\": \"\"},\n  {\"review_id\": \"R016\", \"product\": \"Mouse\", \"rating\": 5, \"text\": \"Best mouse I've ever used\"},\n  {\"review_id\": \"R017\", \"product\": \"Headphones\", \"rating\": 4, \"text\": \"Comfortable for long sessions\"},\n  {\"review_id\": \"R018\", \"product\": \"Laptop\", \"rating\": 4, \"text\": \"Fast and reliable\"},\n  {\"review_id\": \"R019\", \"product\": \"Keyboard\", \"rating\": 3, \"text\": \"Keys are a bit stiff\"},\n  {\"review_id\": \"R020\", \"product\": \"Monitor\", \"rating\": 5, \"text\": \"Perfect for programming\"}\n]\n```\n\n#### `data/chat_messages.json` (for Session 2 Code Along 1)\n\n```json\n[\n  {\"role\": \"system\", \"content\": \"You are a helpful assistant.\", \"timestamp\": \"2026-08-04T09:00:00\"},\n  {\"role\": \"user\", \"content\": \"What is Python?\", \"timestamp\": \"2026-08-04T09:00:05\"},\n  {\"role\": \"assistant\", \"content\": \"Python is a high-level, interpreted programming language known for its readability.\", \"timestamp\": \"2026-08-04T09:00:07\"},\n  {\"role\": \"user\", \"content\": \"What is RAG?\", \"timestamp\": \"2026-08-04T09:01:00\"},\n  {\"role\": \"assistant\", \"content\": \"RAG stands for Retrieval-Augmented Generation. It combines retrieval from a knowledge base with text generation.\", \"timestamp\": \"2026-08-04T09:01:03\"},\n  {\"role\": \"user\", \"content\": \"Give me an example\", \"timestamp\": \"2026-08-04T09:01:30\"},\n  {\"role\": \"assistant\", \"content\": \"A user asks about a company policy. The system retrieves relevant policy documents, then generates an answer based on them.\", \"timestamp\": \"2026-08-04T09:01:35\"},\n  {\"role\": \"user\", \"content\": \"Thanks!\", \"timestamp\": \"2026-08-04T09:02:00\"}\n]\n```\n\n#### `data/document_chunks.json` (for Session 2 Independent Lab)\n\n```json\n[\n  {\"chunk_id\": \"C001\", \"doc_id\": \"DOC001\", \"content\": \"Python is a high-level programming language.\", \"chunk_index\": 0, \"embedding\": null},\n  {\"chunk_id\": \"C002\", \"doc_id\": \"DOC001\", \"content\": \"It was created by Guido van Rossum in 1991.\", \"chunk_index\": 1, \"embedding\": null},\n  {\"chunk_id\": \"C003\", \"doc_id\": \"DOC002\", \"content\": \"Lists are mutable sequences in Python.\", \"chunk_index\": 0, \"embedding\": [0.023, -0.045, 0.112]},\n  {\"chunk_id\": \"C004\", \"doc_id\": \"DOC002\", \"content\": \"Tuples are immutable sequences.\", \"chunk_index\": 1, \"embedding\": [0.067, 0.001, -0.089]},\n  {\"chunk_id\": \"C005\", \"doc_id\": \"DOC003\", \"content\": \"RAG combines retrieval and generation.\", \"chunk_index\": 0, \"embedding\": null},\n  {\"chunk_id\": \"C006\", \"doc_id\": \"DOC003\", \"content\": \"The retriever finds relevant documents.\", \"chunk_index\": 1, \"embedding\": null}\n]\n```\n\n---\n\n## Common Student Mistakes & Interventions\n\n| Mistake | When It Appears | Intervention |\n|---|---|---|\n| Using `r[\"text\"]` instead of `r.get(\"text\")` | Code Along 1, S1 | Show KeyError, then demonstrate `.get()` |\n| Forgetting `reverse=True` in `sorted()` | Code Along 1, S1 | \"What's the default? Ascending. How do we flip it?\" |\n| `json.dumps()` on datetime → TypeError | Code Along 2, S2 | \"JSON doesn't know datetime. What can we convert it to?\" |\n| Mutable default: `tags: list = []` | Concept 2, S2 | Demo the shared-list bug |\n| `from dataclasses import dataclass` misspelling | Code Along 2, S2 | \"Check your spelling — `dataclass` not `dataclasses`\" |\n| Assuming `@dataclass` fields are type-checked at runtime | Concept 3, S2 | \"Type hints are for humans and tools, not Python runtime\" |\n| Using `list` as a variable name (shadowing) | Any lab | \"`list` is a built-in — don't use it as a variable name\" |\n| Not handling the `embedding: None` case | Lab 2 | \"Check for `None` before processing the vector\" |\n\n---\n\n## KC Answer Key (for instructor reference)\n\n### Session 1\n- **KC1:** (b) `tuple` — fixed-length, immutable, hashable\n- **KC2:** (b) `tuple` — immutable and hashable; `list` is unhashable\n\n### Session 2\n- **KC1:** (b) TypeError — datetime is not JSON-serialisable by default\n- **KC2:** (b) `@dataclass` — auto-generates `__init__`, `__repr__`, `__eq__`",
       "doc_id": "AIPY_W1",
       "title": "AI Programming with Python — Week 1 Lecture Notes",
       "source": "data/documents/w1_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.095478",
+      "created_at": "2026-10-17T16:00:59.925754",
       "metadata": {}
     },
     {
@@ -17,7 +67,7 @@
       "source": "data/documents/w2_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.101275",
+      "created_at": "2026-10-17T16:00:59.933624",
       "metadata": {}
     },
     {
@@ -27,7 +77,7 @@
       "source": "data/documents/w3_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.108670",
+      "created_at": "2026-10-17T16:00:59.942549",
       "metadata": {}
     },
     {
@@ -37,7 +87,7 @@
       "source": "data/documents/w4_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.115676",
+      "created_at": "2026-10-17T16:00:59.952003",
       "metadata": {}
     },
     {
@@ -47,7 +97,7 @@
       "source": "data/documents/w5_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.122759",
+      "created_at": "2026-10-17T16:00:59.961031",
       "metadata": {}
     },
     {
@@ -57,11 +107,2283 @@
       "source": "data/documents/w6_lecture_notes.md",
       "version": "2026-10-14",
       "owner": "Department of Advanced Education",
-      "created_at": "2026-10-14T10:51:35.130583",
+      "created_at": "2026-10-17T16:00:59.969021",
       "metadata": {}
     }
   ],
   "chunks": [
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101)\nMôn học 3 tín chỉ, kéo dài 6 tuần, dành cho sinh viên năm hai ngành Khoa học máy tính. Môn học tiên quyết là Nhập môn lập trình. Công cụ sử dụng trong phòng lab là trình biên dịch NASM và trình gỡ lỗi GDB trên Linux, kiến trúc x86-64.",
+      "chunk_id": "CA101_0",
+      "doc_id": "CA101",
+      "chunk_index": 0,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101)",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Mục tiêu\nSinh viên mô tả được bốn thành phần chính của máy tính theo mô hình von Neumann: bộ xử lý trung tâm (CPU), bộ nhớ, thiết bị vào ra và hệ thống bus.",
+      "chunk_id": "CA101_1",
+      "doc_id": "CA101",
+      "chunk_index": 1,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Nội dung\nMô hình von Neumann lưu chương trình và dữ liệu trong cùng một bộ nhớ. CPU gồm đơn vị điều khiển, đơn vị số học và logic (ALU) và tập thanh ghi. Bus được chia thành bus địa chỉ, bus dữ liệu và bus điều khiển.",
+      "chunk_id": "CA101_2",
+      "doc_id": "CA101",
+      "chunk_index": 2,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Bài tập\nBài tập 1 là phiếu trả lời ngắn về các thành phần của máy tính. Hạn nộp là cuối Tuần 1.",
+      "chunk_id": "CA101_3",
+      "doc_id": "CA101",
+      "chunk_index": 3,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.1: Các thành phần của máy tính > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.2: Chu kỳ lệnh > Mục tiêu\nSinh viên trình bày được các giai đoạn của chu kỳ lệnh: nạp lệnh, giải mã, thực thi và ghi kết quả.",
+      "chunk_id": "CA101_4",
+      "doc_id": "CA101",
+      "chunk_index": 4,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.2: Chu kỳ lệnh > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.2: Chu kỳ lệnh > Nội dung\nThanh ghi bộ đếm chương trình (PC) giữ địa chỉ của lệnh kế tiếp. Sau mỗi lần nạp lệnh, PC tăng lên để trỏ đến lệnh sau. Một số lệnh nhảy làm thay đổi giá trị PC trực tiếp.",
+      "chunk_id": "CA101_5",
+      "doc_id": "CA101",
+      "chunk_index": 5,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 1: Tổng quan kiến trúc máy tính > Bài 1.2: Chu kỳ lệnh > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Mục tiêu\nSinh viên chuyển đổi được giữa hệ nhị phân, thập phân và thập lục phân.",
+      "chunk_id": "CA101_6",
+      "doc_id": "CA101",
+      "chunk_index": 6,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Nội dung\nSố nguyên không dấu dùng toàn bộ các bit để biểu diễn giá trị. Số nguyên có dấu dùng biểu diễn bù hai, trong đó bit cao nhất là bit dấu. Với 8 bit, số có dấu biểu diễn được từ -128 đến 127.",
+      "chunk_id": "CA101_7",
+      "doc_id": "CA101",
+      "chunk_index": 7,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Bài tập\nBài tập 2 gồm 15 câu chuyển đổi cơ số và biểu diễn bù hai. Hạn nộp là cuối Tuần 2.",
+      "chunk_id": "CA101_8",
+      "doc_id": "CA101",
+      "chunk_index": 8,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.1: Hệ cơ số và số nguyên > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.2: Số thực và ký tự > Mục tiêu\nSinh viên nhận biết được cách biểu diễn số thực dấu phẩy động theo chuẩn IEEE 754 và cách mã hóa ký tự ASCII.",
+      "chunk_id": "CA101_9",
+      "doc_id": "CA101",
+      "chunk_index": 9,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.2: Số thực và ký tự > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.2: Số thực và ký tự > Nội dung\nSố thực dấu phẩy động 32 bit gồm 1 bit dấu, 8 bit mũ và 23 bit phần định trị. Bảng mã ASCII dùng 7 bit để biểu diễn 128 ký tự.",
+      "chunk_id": "CA101_10",
+      "doc_id": "CA101",
+      "chunk_index": 10,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 2: Biểu diễn dữ liệu > Bài 2.2: Số thực và ký tự > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.1: Thanh ghi trong x86-64 > Mục tiêu\nSinh viên liệt kê được các thanh ghi đa dụng của x86-64 và vai trò của chúng.",
+      "chunk_id": "CA101_11",
+      "doc_id": "CA101",
+      "chunk_index": 11,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.1: Thanh ghi trong x86-64 > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.1: Thanh ghi trong x86-64 > Nội dung\nKiến trúc x86-64 có 16 thanh ghi đa dụng 64 bit, trong đó có RAX, RBX, RCX, RDX, RSI, RDI, RSP và RBP. Thanh ghi RSP trỏ đến đỉnh ngăn xếp. Thanh ghi cờ lưu các cờ như cờ không (ZF) và cờ nhớ (CF).",
+      "chunk_id": "CA101_12",
+      "doc_id": "CA101",
+      "chunk_index": 12,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.1: Thanh ghi trong x86-64 > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Mục tiêu\nSinh viên sử dụng được các lệnh chuyển dữ liệu và lệnh số học cơ bản.",
+      "chunk_id": "CA101_13",
+      "doc_id": "CA101",
+      "chunk_index": 13,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Nội dung\nLệnh MOV sao chép dữ liệu giữa thanh ghi và bộ nhớ. Lệnh ADD và SUB thực hiện phép cộng và phép trừ. Lệnh CMP so sánh hai toán hạng và đặt các cờ tương ứng.",
+      "chunk_id": "CA101_14",
+      "doc_id": "CA101",
+      "chunk_index": 14,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Bài tập\nLab 1 yêu cầu viết chương trình hợp ngữ tính tổng của một mảng số nguyên bằng NASM. Hạn nộp là cuối Tuần 3.",
+      "chunk_id": "CA101_15",
+      "doc_id": "CA101",
+      "chunk_index": 15,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 3: Tập lệnh và thanh ghi > Bài 3.2: Các lệnh cơ bản > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.1: Lệnh nhảy và vòng lặp > Mục tiêu\nSinh viên viết được cấu trúc rẽ nhánh và vòng lặp bằng các lệnh nhảy có điều kiện.",
+      "chunk_id": "CA101_16",
+      "doc_id": "CA101",
+      "chunk_index": 16,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.1: Lệnh nhảy và vòng lặp > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.1: Lệnh nhảy và vòng lặp > Nội dung\nLệnh JMP nhảy vô điều kiện. Lệnh JE và JNE nhảy dựa vào cờ ZF. Vòng lặp được xây dựng bằng cách kết hợp lệnh CMP với một lệnh nhảy có điều kiện quay về nhãn đầu vòng lặp.",
+      "chunk_id": "CA101_17",
+      "doc_id": "CA101",
+      "chunk_index": 17,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.1: Lệnh nhảy và vòng lặp > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Mục tiêu\nSinh viên giải thích được cách ngăn xếp lưu địa chỉ trả về và các biến cục bộ khi gọi hàm.",
+      "chunk_id": "CA101_18",
+      "doc_id": "CA101",
+      "chunk_index": 18,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Nội dung\nLệnh PUSH đặt một giá trị lên ngăn xếp và giảm RSP. Lệnh POP lấy giá trị ra và tăng RSP. Lệnh CALL lưu địa chỉ trả về lên ngăn xếp, và lệnh RET lấy địa chỉ đó ra để quay lại nơi gọi.",
+      "chunk_id": "CA101_19",
+      "doc_id": "CA101",
+      "chunk_index": 19,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Bài tập\nLab 2 yêu cầu viết một hàm hợp ngữ tính giai thừa và gọi hàm đó từ chương trình chính. Hạn nộp là cuối Tuần 4.",
+      "chunk_id": "CA101_20",
+      "doc_id": "CA101",
+      "chunk_index": 20,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 4: Luồng điều khiển và ngăn xếp > Bài 4.2: Ngăn xếp và lời gọi hàm > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.1: Kiểm tra giữa kỳ > Nội dung\nBài kiểm tra giữa kỳ là bài viết trên giấy, thời gian 60 phút, diễn ra vào buổi học đầu tiên của Tuần 5. Phạm vi gồm nội dung từ Tuần 1 đến Tuần 4. Sinh viên không được sử dụng tài liệu.",
+      "chunk_id": "CA101_21",
+      "doc_id": "CA101",
+      "chunk_index": 21,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.1: Kiểm tra giữa kỳ > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.2: Phân cấp bộ nhớ > Mục tiêu\nSinh viên giải thích được vì sao máy tính dùng nhiều tầng bộ nhớ.",
+      "chunk_id": "CA101_22",
+      "doc_id": "CA101",
+      "chunk_index": 22,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.2: Phân cấp bộ nhớ > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.2: Phân cấp bộ nhớ > Nội dung\nPhân cấp bộ nhớ gồm thanh ghi, bộ nhớ đệm (cache), bộ nhớ chính (RAM) và bộ nhớ ngoài. Tầng càng gần CPU thì truy cập càng nhanh nhưng dung lượng càng nhỏ và giá thành mỗi byte càng cao.",
+      "chunk_id": "CA101_23",
+      "doc_id": "CA101",
+      "chunk_index": 23,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 5: Kiểm tra giữa kỳ và phân cấp bộ nhớ > Bài 5.2: Phân cấp bộ nhớ > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Mục tiêu\nSinh viên phân biệt được cục bộ về thời gian và cục bộ về không gian, và tính được tỷ lệ trúng cache.",
+      "chunk_id": "CA101_24",
+      "doc_id": "CA101",
+      "chunk_index": 24,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Nội dung\nCục bộ về thời gian nghĩa là dữ liệu vừa được truy cập có xu hướng được truy cập lại sớm. Cục bộ về không gian nghĩa là các ô nhớ lân cận có xu hướng được truy cập tiếp theo. Tỷ lệ trúng cache bằng số lần trúng chia cho tổng số lần truy cập.",
+      "chunk_id": "CA101_25",
+      "doc_id": "CA101",
+      "chunk_index": 25,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Bài tập\nBài tập 3 gồm 8 câu tính tỷ lệ trúng cache và thời gian truy cập trung bình. Hạn nộp là cuối Tuần 6.",
+      "chunk_id": "CA101_26",
+      "doc_id": "CA101",
+      "chunk_index": 26,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.1: Nguyên lý cục bộ và bộ nhớ đệm > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.2: Ôn tập và đánh giá > Nội dung\nBuổi ôn tập diễn ra vào buổi học cuối của Tuần 6. Thi cuối kỳ diễn ra sau Tuần 6, hình thức thi viết 90 phút.",
+      "chunk_id": "CA101_27",
+      "doc_id": "CA101",
+      "chunk_index": 27,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Tuần 6: Bộ nhớ đệm và ôn tập > Bài 6.2: Ôn tập và đánh giá > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Kiến trúc máy tính và hợp ngữ (CA101) > Đánh giá môn học > Cơ cấu điểm > Nội dung\nĐiểm chuyên cần chiếm 10 phần trăm. Điểm lab và bài tập chiếm 20 phần trăm. Điểm kiểm tra giữa kỳ chiếm 30 phần trăm. Điểm thi cuối kỳ chiếm 40 phần trăm. Sinh viên cần đạt tối thiểu 4 trên 10 điểm thi cuối kỳ để đậu môn học.",
+      "chunk_id": "CA101_28",
+      "doc_id": "CA101",
+      "chunk_index": 28,
+      "metadata": {
+        "title": "Kiến trúc máy tính và hợp ngữ",
+        "version": "2026-09-02",
+        "owner": "Bộ môn Kỹ thuật máy tính",
+        "source": "data/documents/CA101_course_material.md",
+        "heading_path": "Kiến trúc máy tính và hợp ngữ (CA101) > Đánh giá môn học > Cơ cấu điểm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101)\nTài liệu học tập mẫu cho môn CS101, dành cho sinh viên mới học lập trình. Nội dung bao gồm tư duy thuật toán, biến và kiểu dữ liệu, câu lệnh điều khiển, hàm, mảng, chuỗi và các kỹ thuật giải quyết bài toán cơ bản. Ví dụ mã nguồn sử dụng Python để minh họa; cú pháp có thể cần điều chỉnh nếu lớp học sử dụng ngôn ngữ khác.",
+      "chunk_id": "CS101_0",
+      "doc_id": "CS101",
+      "chunk_index": 0,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101)",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Mục tiêu\nSinh viên mô tả được thuật toán như một chuỗi bước hữu hạn để giải quyết bài toán và phân biệt thuật toán với chương trình thực thi.",
+      "chunk_id": "CS101_1",
+      "doc_id": "CS101",
+      "chunk_index": 1,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Nội dung\nMột thuật toán cần có đầu vào, đầu ra và các bước xử lý rõ ràng. Trước khi viết mã, nên xác định yêu cầu, chia bài toán thành các bước nhỏ và kiểm tra kết quả mong đợi bằng ví dụ.",
+      "chunk_id": "CS101_2",
+      "doc_id": "CS101",
+      "chunk_index": 2,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Bài tập\nViết thuật toán dạng giả mã để tính tổng hai số nguyên và tìm số lớn hơn trong hai số.",
+      "chunk_id": "CS101_3",
+      "doc_id": "CS101",
+      "chunk_index": 3,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.1: Thuật toán và chương trình > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.2: Cấu trúc chương trình > Mục tiêu\nSinh viên nhận biết được cách một chương trình nhận dữ liệu, xử lý và xuất kết quả.",
+      "chunk_id": "CS101_4",
+      "doc_id": "CS101",
+      "chunk_index": 4,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.2: Cấu trúc chương trình > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.2: Cấu trúc chương trình > Nội dung\nMột chương trình đơn giản thường gồm phần nhập dữ liệu, xử lý và in kết quả. Lỗi cú pháp xảy ra khi mã không tuân thủ quy tắc ngôn ngữ; lỗi logic xảy ra khi chương trình chạy nhưng cho kết quả sai.",
+      "chunk_id": "CS101_5",
+      "doc_id": "CS101",
+      "chunk_index": 5,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 1: Tổng quan lập trình và thuật toán > Bài 1.2: Cấu trúc chương trình > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Mục tiêu\nSinh viên khai báo hoặc tạo biến phù hợp để lưu trữ dữ liệu và giải thích được vai trò của kiểu dữ liệu.",
+      "chunk_id": "CS101_6",
+      "doc_id": "CS101",
+      "chunk_index": 6,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Nội dung\nBiến là tên tham chiếu đến một giá trị trong chương trình. Các kiểu dữ liệu thường gặp gồm số nguyên, số thực, chuỗi ký tự và giá trị logic. Việc chọn kiểu dữ liệu phù hợp giúp phép tính và thao tác dữ liệu có ý nghĩa.",
+      "chunk_id": "CS101_7",
+      "doc_id": "CS101",
+      "chunk_index": 7,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Bài tập\nViết chương trình nhập chiều dài và chiều rộng hình chữ nhật, sau đó in diện tích và chu vi.",
+      "chunk_id": "CS101_8",
+      "doc_id": "CS101",
+      "chunk_index": 8,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.1: Biến và kiểu dữ liệu > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.2: Toán tử và biểu thức > Mục tiêu\nSinh viên sử dụng được toán tử số học, so sánh và logic trong biểu thức.",
+      "chunk_id": "CS101_9",
+      "doc_id": "CS101",
+      "chunk_index": 9,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.2: Toán tử và biểu thức > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.2: Toán tử và biểu thức > Nội dung\nCác toán tử số học thường gồm cộng, trừ, nhân, chia và chia lấy dư. Toán tử so sánh tạo ra kết quả đúng/sai; toán tử logic kết hợp các điều kiện. Cần chú ý thứ tự ưu tiên toán tử và dùng dấu ngoặc khi muốn làm rõ thứ tự tính.",
+      "chunk_id": "CS101_10",
+      "doc_id": "CS101",
+      "chunk_index": 10,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 2: Biến, kiểu dữ liệu và biểu thức > Bài 2.2: Toán tử và biểu thức > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Mục tiêu\nSinh viên dùng cấu trúc `if`, `elif` và `else` để lựa chọn hành động dựa trên điều kiện.",
+      "chunk_id": "CS101_11",
+      "doc_id": "CS101",
+      "chunk_index": 11,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Nội dung\nCâu lệnh điều kiện cho phép chương trình thực hiện các nhánh khác nhau tùy theo biểu thức logic. Điều kiện cần được kiểm tra với cả trường hợp biên, chẳng hạn giá trị bằng ngưỡng, nhỏ hơn ngưỡng hoặc lớn hơn ngưỡng.",
+      "chunk_id": "CS101_12",
+      "doc_id": "CS101",
+      "chunk_index": 12,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Bài tập\nViết chương trình phân loại một số nguyên là âm, dương hoặc bằng không.",
+      "chunk_id": "CS101_13",
+      "doc_id": "CS101",
+      "chunk_index": 13,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.1: Câu lệnh điều kiện > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Mục tiêu\nSinh viên chọn và sử dụng vòng lặp để lặp lại một khối lệnh.",
+      "chunk_id": "CS101_14",
+      "doc_id": "CS101",
+      "chunk_index": 14,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Nội dung\nVòng lặp `for` thường phù hợp khi duyệt qua một dãy phần tử hoặc một số lần xác định. Vòng lặp `while` tiếp tục chạy khi điều kiện còn đúng. Cần bảo đảm điều kiện dừng có thể đạt được để tránh vòng lặp vô hạn.",
+      "chunk_id": "CS101_15",
+      "doc_id": "CS101",
+      "chunk_index": 15,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Bài tập\nViết chương trình tính tổng các số nguyên từ 1 đến n bằng vòng lặp.",
+      "chunk_id": "CS101_16",
+      "doc_id": "CS101",
+      "chunk_index": 16,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 3: Rẽ nhánh và vòng lặp > Bài 3.2: Vòng lặp > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Mục tiêu\nSinh viên chia chương trình thành các hàm có nhiệm vụ rõ ràng, truyền tham số và trả về kết quả bằng `return`.",
+      "chunk_id": "CS101_17",
+      "doc_id": "CS101",
+      "chunk_index": 17,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Nội dung\nHàm là một khối mã có thể được gọi nhiều lần. Tham số nhận dữ liệu đầu vào; giá trị trả về là kết quả mà hàm gửi lại cho nơi gọi. Hàm nên có tên mô tả nhiệm vụ và tránh đảm nhiệm quá nhiều công việc không liên quan.",
+      "chunk_id": "CS101_18",
+      "doc_id": "CS101",
+      "chunk_index": 18,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Bài tập\nViết hàm nhận vào hai số và trả về số lớn hơn. Kiểm thử với số âm, hai số bằng nhau và các giá trị khác nhau.",
+      "chunk_id": "CS101_19",
+      "doc_id": "CS101",
+      "chunk_index": 19,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.1: Hàm, tham số và giá trị trả về > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Mục tiêu\nSinh viên giải thích được đệ quy, xác định trường hợp cơ sở và trường hợp đệ quy, đồng thời viết và kiểm thử được một hàm đệ quy đơn giản.",
+      "chunk_id": "CS101_20",
+      "doc_id": "CS101",
+      "chunk_index": 20,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Nội dung\n**Đệ quy** là kỹ thuật trong đó một hàm gọi lại chính nó để giải quyết một phiên bản nhỏ hơn của cùng bài toán. Một hàm đệ quy đúng cần có:\n\n1. **Trường hợp cơ sở (base case):** điều kiện dừng, trả về kết quả mà không gọi tiếp chính hàm đó.\n2. **Trường hợp đệ quy (recursive case):** chia bài toán thành bài toán nhỏ hơn và gọi lại hàm với đầu vào tiến gần đến trường hợp cơ sở.\n3. **Tiến trình đến điểm dừng:** mỗi lời gọi cần làm cho bài toán nhỏ hơn hoặc tiến gần điều kiện dừng; nếu không, chương trình có thể gọi vô hạn cho đến khi xảy ra lỗi tràn ngăn xếp (recursion depth/stack overflow tùy ngôn ngữ).",
+      "chunk_id": "CS101_21",
+      "doc_id": "CS101",
+      "chunk_index": 21,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Ví dụ 1: Tính giai thừa\nGiai thừa của số nguyên không âm n được định nghĩa là `n! = 1` khi `n = 0`, và `n! = n × (n-1)!` khi `n > 0`.\n\n```python\ndef factorial(n):\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    if n == 0:                 # base case\n        return 1\n    return n * factorial(n - 1)  # recursive case\n```\n\nVới `factorial(4)`, các lời gọi lần lượt giảm đối số: `factorial(4)`, `factorial(3)`, `factorial(2)`, `factorial(1)`, `factorial(0)`. Trường hợp cơ sở trả về `1`, sau đó các lời gọi đang chờ trả về lần lượt `1`, `2`, `6` và `24`.",
+      "chunk_id": "CS101_22",
+      "doc_id": "CS101",
+      "chunk_index": 22,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Ví dụ 1: Tính giai thừa",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Ví dụ 2: Tính tổng từ 1 đến n\n```python\ndef sum_to_n(n):\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    if n == 0:             # base case\n        return 0\n    return n + sum_to_n(n - 1)  # recursive case\n```\n\nVí dụ, `sum_to_n(4)` trả về `4 + 3 + 2 + 1 + 0 = 10`.",
+      "chunk_id": "CS101_23",
+      "doc_id": "CS101",
+      "chunk_index": 23,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Ví dụ 2: Tính tổng từ 1 đến n",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Cách phân tích một bài đệ quy\n- Xác định đầu vào và kết quả cần trả về.\n- Tìm trường hợp nhỏ nhất có thể trả lời trực tiếp.\n- Viết quan hệ giữa kết quả hiện tại và lời gọi với đầu vào nhỏ hơn.\n- Kiểm tra rằng đầu vào tiến đến trường hợp cơ sở.\n- Lần theo các lời gọi bằng một ví dụ nhỏ trước khi kiểm thử đầu vào lớn hơn.",
+      "chunk_id": "CS101_24",
+      "doc_id": "CS101",
+      "chunk_index": 24,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Cách phân tích một bài đệ quy",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Lỗi thường gặp\n- **Thiếu trường hợp cơ sở:** hàm tiếp tục gọi chính nó và không dừng đúng cách.\n- **Trường hợp cơ sở không thể đạt tới:** đối số không giảm hoặc không tiến về điều kiện dừng.\n- **Sai giá trị trả về:** dùng `print()` thay vì `return` khi cần kết quả để tính tiếp.\n- **Sai công thức đệ quy:** ví dụ gọi `factorial(n)` thay vì `factorial(n - 1)` trong trường hợp đệ quy.\n- **Không xử lý đầu vào biên:** cần xác định hàm sẽ làm gì với `n = 0`, `n = 1` hoặc đầu vào không hợp lệ.",
+      "chunk_id": "CS101_25",
+      "doc_id": "CS101",
+      "chunk_index": 25,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Lỗi thường gặp",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Bài tập tự luyện\n1. Viết hàm đệ quy tính tổng các chữ số của một số nguyên không âm.\n2. Viết hàm đệ quy đếm số phần tử trong một danh sách.\n3. Viết hàm đệ quy tìm số Fibonacci thứ n; xác định trường hợp cơ sở cho `n = 0` và `n = 1`.\n4. Với mỗi hàm, chỉ rõ base case, recursive case và giải thích vì sao lời gọi sẽ dừng.\n5. So sánh lời giải đệ quy với lời giải dùng vòng lặp về độ dễ hiểu và chi phí lời gọi hàm.",
+      "chunk_id": "CS101_26",
+      "doc_id": "CS101",
+      "chunk_index": 26,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.2: Hàm đệ quy (Recursive Functions) > Bài tập tự luyện",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Mục tiêu\nSinh viên mô phỏng được thứ tự gọi hàm và trả kết quả khi có nhiều lời gọi lồng nhau.",
+      "chunk_id": "CS101_27",
+      "doc_id": "CS101",
+      "chunk_index": 27,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Nội dung\nMỗi lần gọi hàm, chương trình cần theo dõi thông tin của lời gọi hiện tại, bao gồm tham số và vị trí tiếp tục thực thi sau khi hàm trả về. Trong đệ quy, nhiều lời gọi của cùng một hàm có thể đang chờ kết quả cùng lúc. Khi chạm trường hợp cơ sở, các lời gọi được hoàn tất theo thứ tự ngược lại với thứ tự chúng được tạo ra.",
+      "chunk_id": "CS101_28",
+      "doc_id": "CS101",
+      "chunk_index": 28,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Bài tập\nVẽ sơ đồ lời gọi của `factorial(3)` và ghi kết quả trả về ở từng bước.",
+      "chunk_id": "CS101_29",
+      "doc_id": "CS101",
+      "chunk_index": 29,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 4: Hàm và đệ quy > Bài 4.3: Theo dõi lời gọi hàm và ngăn xếp lời gọi > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Mục tiêu\nSinh viên truy cập, duyệt và cập nhật phần tử trong mảng hoặc danh sách.",
+      "chunk_id": "CS101_30",
+      "doc_id": "CS101",
+      "chunk_index": 30,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Nội dung\nMảng hoặc danh sách lưu nhiều phần tử theo thứ tự. Chỉ số thường bắt đầu từ 0 trong Python. Khi duyệt danh sách, cần tránh truy cập chỉ số ngoài phạm vi và phân biệt chỉ số với giá trị phần tử.",
+      "chunk_id": "CS101_31",
+      "doc_id": "CS101",
+      "chunk_index": 31,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Bài tập\nViết hàm tìm giá trị lớn nhất trong danh sách số, có xử lý trường hợp danh sách rỗng.",
+      "chunk_id": "CS101_32",
+      "doc_id": "CS101",
+      "chunk_index": 32,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.1: Cấu trúc dữ liệu tuần tự > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.2: Xử lý chuỗi > Mục tiêu\nSinh viên sử dụng được các thao tác cơ bản để duyệt và xử lý chuỗi.",
+      "chunk_id": "CS101_33",
+      "doc_id": "CS101",
+      "chunk_index": 33,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.2: Xử lý chuỗi > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.2: Xử lý chuỗi > Nội dung\nChuỗi biểu diễn dãy ký tự. Các thao tác cơ bản gồm lấy độ dài, truy cập ký tự, cắt chuỗi và kiểm tra sự xuất hiện của chuỗi con. Khi xử lý văn bản, cần kiểm tra chuỗi rỗng và phân biệt chữ hoa với chữ thường nếu yêu cầu bài toán có quy định.",
+      "chunk_id": "CS101_34",
+      "doc_id": "CS101",
+      "chunk_index": 34,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 5: Mảng, danh sách và chuỗi > Bài 5.2: Xử lý chuỗi > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Mục tiêu\nSinh viên xây dựng được các ca kiểm thử cơ bản và xác định nguyên nhân của lỗi cú pháp hoặc lỗi logic.",
+      "chunk_id": "CS101_35",
+      "doc_id": "CS101",
+      "chunk_index": 35,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Nội dung\nMột bộ kiểm thử nên bao gồm trường hợp thông thường, trường hợp biên và đầu vào không hợp lệ khi phù hợp. Với hàm đệ quy, đặc biệt kiểm tra trường hợp cơ sở, trường hợp sát cơ sở và đầu vào làm phát sinh nhiều lời gọi.",
+      "chunk_id": "CS101_36",
+      "doc_id": "CS101",
+      "chunk_index": 36,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Bài tập\nViết các ca kiểm thử cho `factorial(n)` với `n = 0`, `n = 1`, `n = 4` và `n = -1`.",
+      "chunk_id": "CS101_37",
+      "doc_id": "CS101",
+      "chunk_index": 37,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.1: Kiểm thử và gỡ lỗi > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.2: Ôn tập và đánh giá > Nội dung\nNội dung ôn tập gồm thuật toán, biến và kiểu dữ liệu, biểu thức, rẽ nhánh, vòng lặp, hàm, đệ quy, cấu trúc dữ liệu tuần tự và kiểm thử. Khi giải bài, sinh viên nên giải thích cách tiếp cận, viết mã, chạy các ca kiểm thử và sửa lỗi dựa trên kết quả quan sát được.",
+      "chunk_id": "CS101_38",
+      "doc_id": "CS101",
+      "chunk_index": 38,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Tuần 6: Kiểm thử, gỡ lỗi và ôn tập > Bài 6.2: Ôn tập và đánh giá > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Nhập môn lập trình (CS101) > Ghi chú hỗ trợ nhanh: Hàm đệ quy trong CS101\nNếu cần hỗ trợ gấp về recursive functions, hãy kiểm tra ba câu hỏi sau:\n\n1. **Dừng ở đâu?** Xác định điều kiện cơ sở, chẳng hạn `n == 0`.\n2. **Gọi lại với bài toán nào nhỏ hơn?** Ví dụ `factorial(n - 1)`.\n3. **Kết quả được kết hợp như thế nào?** Ví dụ `n * factorial(n - 1)`.\n\nMẫu tổng quát:\n\n```python\ndef recursive_function(problem):\n    if base_case(problem):\n        return direct_answer(problem)\n    smaller_result = recursive_function(smaller_problem(problem))\n    return combine(problem, smaller_result)\n```\n\nMẫu trên chỉ là sơ đồ ý tưởng; `base_case`, `direct_answer`, `smaller_problem` và `combine` cần được thay bằng điều kiện và phép tính cụ thể của từng bài toán.",
+      "chunk_id": "CS101_39",
+      "doc_id": "CS101",
+      "chunk_index": 39,
+      "metadata": {
+        "title": "Nhập môn lập trình",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS101_course_material.md",
+        "heading_path": "Nhập môn lập trình (CS101) > Ghi chú hỗ trợ nhanh: Hàm đệ quy trong CS101",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102)\nTài liệu học tập mẫu về cách tổ chức dữ liệu và thiết kế thuật toán cơ bản. Ví dụ minh họa sử dụng Python.",
+      "chunk_id": "CS102_0",
+      "doc_id": "CS102",
+      "chunk_index": 0,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102)",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Mục tiêu\nSinh viên mô tả được chi phí thực thi của thuật toán khi kích thước đầu vào tăng.",
+      "chunk_id": "CS102_1",
+      "doc_id": "CS102",
+      "chunk_index": 1,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Nội dung\nĐộ phức tạp thời gian biểu diễn xu hướng tăng số phép toán theo kích thước đầu vào. Ký hiệu Big-O thường dùng để mô tả cận trên tiệm cận. Ví dụ, duyệt một danh sách n phần tử thường có độ phức tạp O(n), còn hai vòng lặp lồng nhau cùng chạy n lần thường tạo ra O(n²).",
+      "chunk_id": "CS102_2",
+      "doc_id": "CS102",
+      "chunk_index": 2,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Bài tập\nSo sánh số lần lặp của một vòng lặp đơn với hai vòng lặp lồng nhau.",
+      "chunk_id": "CS102_3",
+      "doc_id": "CS102",
+      "chunk_index": 3,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.1: Độ phức tạp thời gian > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.2: Tìm kiếm > Mục tiêu\nPhân biệt tìm kiếm tuyến tính và tìm kiếm nhị phân.",
+      "chunk_id": "CS102_4",
+      "doc_id": "CS102",
+      "chunk_index": 4,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.2: Tìm kiếm > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.2: Tìm kiếm > Nội dung\nTìm kiếm tuyến tính kiểm tra từng phần tử, có thời gian O(n) trong trường hợp xấu nhất. Tìm kiếm nhị phân liên tục chia đôi phạm vi tìm kiếm và có thời gian O(log n), nhưng yêu cầu dữ liệu đã được sắp xếp.",
+      "chunk_id": "CS102_5",
+      "doc_id": "CS102",
+      "chunk_index": 5,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 1: Phân tích thuật toán > Bài 1.2: Tìm kiếm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.1: Mảng và danh sách liên kết > Mục tiêu\nGiải thích được sự khác nhau giữa truy cập phần tử theo chỉ số và duyệt qua các nút.",
+      "chunk_id": "CS102_6",
+      "doc_id": "CS102",
+      "chunk_index": 6,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.1: Mảng và danh sách liên kết > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.1: Mảng và danh sách liên kết > Nội dung\nMảng hỗ trợ truy cập theo chỉ số trong thời gian O(1) trong mô hình thông thường. Danh sách liên kết lưu các nút có liên kết đến nút tiếp theo; muốn đến một vị trí thường phải duyệt từ đầu, mất O(n).",
+      "chunk_id": "CS102_7",
+      "doc_id": "CS102",
+      "chunk_index": 7,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.1: Mảng và danh sách liên kết > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Mục tiêu\nSử dụng được hai cấu trúc dữ liệu tuyến tính cơ bản.",
+      "chunk_id": "CS102_8",
+      "doc_id": "CS102",
+      "chunk_index": 8,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Nội dung\nNgăn xếp hoạt động theo nguyên tắc LIFO (vào sau, ra trước), với các thao tác push và pop. Hàng đợi hoạt động theo nguyên tắc FIFO (vào trước, ra trước), với các thao tác enqueue và dequeue.",
+      "chunk_id": "CS102_9",
+      "doc_id": "CS102",
+      "chunk_index": 9,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Bài tập\nMô phỏng thứ tự phần tử sau một chuỗi thao tác push/pop và enqueue/dequeue.",
+      "chunk_id": "CS102_10",
+      "doc_id": "CS102",
+      "chunk_index": 10,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 2: Mảng, danh sách liên kết và ngăn xếp > Bài 2.2: Ngăn xếp và hàng đợi > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Mục tiêu\nMô tả được ý tưởng của bubble sort, selection sort và insertion sort.",
+      "chunk_id": "CS102_11",
+      "doc_id": "CS102",
+      "chunk_index": 11,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Nội dung\nBubble sort đổi chỗ các phần tử kề nhau nếu sai thứ tự. Selection sort tìm phần tử nhỏ nhất trong phần chưa sắp xếp rồi đưa về vị trí kế tiếp. Insertion sort lần lượt chèn từng phần tử vào vị trí thích hợp trong phần đã sắp xếp. Các thuật toán này thường có thời gian O(n²) trong trường hợp trung bình hoặc xấu nhất.",
+      "chunk_id": "CS102_12",
+      "doc_id": "CS102",
+      "chunk_index": 12,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Bài tập\nSắp xếp danh sách [5, 2, 4, 1] bằng insertion sort và ghi lại trạng thái sau mỗi lượt.",
+      "chunk_id": "CS102_13",
+      "doc_id": "CS102",
+      "chunk_index": 13,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.1: Thuật toán sắp xếp cơ bản > Bài tập",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.2: Merge sort và quicksort > Mục tiêu\nTrình bày được ý tưởng chia để trị trong sắp xếp.",
+      "chunk_id": "CS102_14",
+      "doc_id": "CS102",
+      "chunk_index": 14,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.2: Merge sort và quicksort > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.2: Merge sort và quicksort > Nội dung\nMerge sort chia dữ liệu thành các phần nhỏ, sắp xếp từng phần rồi trộn lại; thời gian điển hình O(n log n). Quicksort chọn pivot, phân hoạch dữ liệu rồi sắp xếp đệ quy các phần; thời gian trung bình O(n log n), nhưng trường hợp xấu nhất có thể là O(n²).",
+      "chunk_id": "CS102_15",
+      "doc_id": "CS102",
+      "chunk_index": 15,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 3: Sắp xếp > Bài 3.2: Merge sort và quicksort > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.1: Cây tìm kiếm nhị phân > Mục tiêu\nGiải thích cấu trúc nút, cây con trái và cây con phải.",
+      "chunk_id": "CS102_16",
+      "doc_id": "CS102",
+      "chunk_index": 16,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.1: Cây tìm kiếm nhị phân > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.1: Cây tìm kiếm nhị phân > Nội dung\nTrong cây tìm kiếm nhị phân, các khóa ở cây con trái nhỏ hơn khóa nút theo quy ước so sánh, còn các khóa ở cây con phải lớn hơn. Thời gian thao tác phụ thuộc vào chiều cao cây; cây cân bằng thường cho thao tác tìm kiếm O(log n), trong khi cây lệch có thể cần O(n).",
+      "chunk_id": "CS102_17",
+      "doc_id": "CS102",
+      "chunk_index": 17,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.1: Cây tìm kiếm nhị phân > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.2: Bảng băm > Mục tiêu\nGiải thích cách ánh xạ khóa thành vị trí lưu trữ.",
+      "chunk_id": "CS102_18",
+      "doc_id": "CS102",
+      "chunk_index": 18,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.2: Bảng băm > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.2: Bảng băm > Nội dung\nHàm băm chuyển khóa thành giá trị dùng để xác định vị trí trong bảng. Va chạm xảy ra khi nhiều khóa ánh xạ đến cùng vị trí. Hai chiến lược xử lý phổ biến là chaining và open addressing.",
+      "chunk_id": "CS102_19",
+      "doc_id": "CS102",
+      "chunk_index": 19,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 4: Cây và bảng băm > Bài 4.2: Bảng băm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.1: Biểu diễn đồ thị > Mục tiêu\nPhân biệt danh sách kề và ma trận kề.",
+      "chunk_id": "CS102_20",
+      "doc_id": "CS102",
+      "chunk_index": 20,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.1: Biểu diễn đồ thị > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.1: Biểu diễn đồ thị > Nội dung\nDanh sách kề lưu các đỉnh kề với từng đỉnh và thường tiết kiệm bộ nhớ cho đồ thị thưa. Ma trận kề dùng ma trận để thể hiện cạnh giữa các cặp đỉnh và có thể truy vấn sự tồn tại của cạnh trong O(1), nhưng cần O(V²) bộ nhớ.",
+      "chunk_id": "CS102_21",
+      "doc_id": "CS102",
+      "chunk_index": 21,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.1: Biểu diễn đồ thị > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.2: BFS và DFS > Mục tiêu\nMô tả được tìm kiếm theo chiều rộng và chiều sâu.",
+      "chunk_id": "CS102_22",
+      "doc_id": "CS102",
+      "chunk_index": 22,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.2: BFS và DFS > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.2: BFS và DFS > Nội dung\nBFS duyệt theo từng lớp khoảng cách và thường dùng hàng đợi. DFS đi sâu theo một nhánh trước khi quay lui, thường triển khai bằng đệ quy hoặc ngăn xếp.",
+      "chunk_id": "CS102_23",
+      "doc_id": "CS102",
+      "chunk_index": 23,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 5: Đồ thị > Bài 5.2: BFS và DFS > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 6: Ôn tập và kiểm thử > Bài 6.1: Chọn thuật toán > Nội dung\nViệc lựa chọn thuật toán cần cân nhắc kích thước dữ liệu, yêu cầu đầu ra, độ phức tạp thời gian và bộ nhớ, cũng như mức độ đơn giản khi triển khai.",
+      "chunk_id": "CS102_24",
+      "doc_id": "CS102",
+      "chunk_index": 24,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 6: Ôn tập và kiểm thử > Bài 6.1: Chọn thuật toán > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 6: Ôn tập và kiểm thử > Bài 6.2: Kiểm thử > Nội dung\nKiểm thử nên bao gồm đầu vào thông thường, trường hợp biên và dữ liệu có thể làm lộ lỗi. Với thuật toán sắp xếp, cần kiểm tra danh sách rỗng, một phần tử, phần tử trùng nhau và dữ liệu đã được sắp xếp.",
+      "chunk_id": "CS102_25",
+      "doc_id": "CS102",
+      "chunk_index": 25,
+      "metadata": {
+        "title": "Cấu trúc dữ liệu và giải thuật",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS102_data_structures_algorithms.md",
+        "heading_path": "Cấu trúc dữ liệu và giải thuật (CS102) > Tuần 6: Ôn tập và kiểm thử > Bài 6.2: Kiểm thử > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201)\nTài liệu mẫu giới thiệu các khái niệm lập trình hướng đối tượng (OOP). Ví dụ sử dụng cú pháp gần với Python; một số khái niệm cũng áp dụng trong Java, C++ và C#.",
+      "chunk_id": "CS201_0",
+      "doc_id": "CS201",
+      "chunk_index": 0,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201)",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.1: Lớp và đối tượng > Mục tiêu\nPhân biệt được lớp (class) với đối tượng (object).",
+      "chunk_id": "CS201_1",
+      "doc_id": "CS201",
+      "chunk_index": 1,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.1: Lớp và đối tượng > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.1: Lớp và đối tượng > Nội dung\nLớp định nghĩa cấu trúc và hành vi chung; đối tượng là một thể hiện cụ thể của lớp. Thuộc tính biểu diễn trạng thái, còn phương thức biểu diễn hành vi.\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n\nstudent = Student(\"An\")\n```\n\nTrong ví dụ, `Student` là lớp và `student` tham chiếu đến một đối tượng có thuộc tính `name`.",
+      "chunk_id": "CS201_2",
+      "doc_id": "CS201",
+      "chunk_index": 2,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.1: Lớp và đối tượng > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.2: Hàm khởi tạo > Mục tiêu\nHiểu vai trò của hàm khởi tạo khi tạo đối tượng.",
+      "chunk_id": "CS201_3",
+      "doc_id": "CS201",
+      "chunk_index": 3,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.2: Hàm khởi tạo > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.2: Hàm khởi tạo > Nội dung\nTrong Python, `__init__` được gọi để khởi tạo trạng thái của đối tượng sau khi đối tượng được tạo. Tham số `self` tham chiếu đến đối tượng hiện tại.",
+      "chunk_id": "CS201_4",
+      "doc_id": "CS201",
+      "chunk_index": 4,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 1: Lớp và đối tượng > Bài 1.2: Hàm khởi tạo > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.1: Đóng gói > Mục tiêu\nGiải thích được lý do gom dữ liệu và hành vi trong một lớp.",
+      "chunk_id": "CS201_5",
+      "doc_id": "CS201",
+      "chunk_index": 5,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.1: Đóng gói > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.1: Đóng gói > Nội dung\nĐóng gói tổ chức dữ liệu và phương thức liên quan trong cùng một đơn vị, đồng thời định hướng cách bên ngoài tương tác với trạng thái của đối tượng. Python sử dụng quy ước đặt tên và cơ chế truy cập thay vì áp dụng mức truy cập như một số ngôn ngữ khác.",
+      "chunk_id": "CS201_6",
+      "doc_id": "CS201",
+      "chunk_index": 6,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.1: Đóng gói > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.2: Thuộc tính và phương thức > Mục tiêu\nThiết kế được phương thức để thao tác với trạng thái đối tượng.",
+      "chunk_id": "CS201_7",
+      "doc_id": "CS201",
+      "chunk_index": 7,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.2: Thuộc tính và phương thức > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.2: Thuộc tính và phương thức > Nội dung\nPhương thức thường dùng dữ liệu của đối tượng để thực hiện một hành động. Nên xác định rõ trách nhiệm của từng phương thức và tránh để nhiều phần của chương trình sửa trạng thái theo những cách không nhất quán.",
+      "chunk_id": "CS201_8",
+      "doc_id": "CS201",
+      "chunk_index": 8,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 2: Đóng gói và giao diện > Bài 2.2: Thuộc tính và phương thức > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.1: Kế thừa > Mục tiêu\nMô tả được quan hệ lớp cha và lớp con.",
+      "chunk_id": "CS201_9",
+      "doc_id": "CS201",
+      "chunk_index": 9,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.1: Kế thừa > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.1: Kế thừa > Nội dung\nKế thừa cho phép lớp con sử dụng hoặc mở rộng hành vi của lớp cha. Chỉ nên dùng kế thừa khi quan hệ giữa các lớp thể hiện hợp lý quan hệ “là một” (is-a).",
+      "chunk_id": "CS201_10",
+      "doc_id": "CS201",
+      "chunk_index": 10,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.1: Kế thừa > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.2: Đa hình > Mục tiêu\nGiải thích được cách các đối tượng khác loại có thể cung cấp cùng một giao diện hành vi.",
+      "chunk_id": "CS201_11",
+      "doc_id": "CS201",
+      "chunk_index": 11,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.2: Đa hình > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.2: Đa hình > Nội dung\nĐa hình cho phép cùng một lời gọi phương thức tạo ra hành vi khác nhau tùy theo đối tượng thực tế. Ví dụ, các lớp `Circle` và `Rectangle` có thể cùng triển khai phương thức `area()` nhưng tính diện tích theo công thức khác nhau.",
+      "chunk_id": "CS201_12",
+      "doc_id": "CS201",
+      "chunk_index": 12,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 3: Kế thừa và đa hình > Bài 3.2: Đa hình > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.1: Trừu tượng hóa > Mục tiêu\nXác định được những đặc điểm quan trọng của đối tượng trong bài toán.",
+      "chunk_id": "CS201_13",
+      "doc_id": "CS201",
+      "chunk_index": 13,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.1: Trừu tượng hóa > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.1: Trừu tượng hóa > Nội dung\nTrừu tượng hóa tập trung vào thông tin cần thiết cho yêu cầu và ẩn bớt chi tiết không liên quan. Khi thiết kế lớp, cần xem xét dữ liệu, hành vi, trách nhiệm và mối quan hệ giữa các lớp.",
+      "chunk_id": "CS201_14",
+      "doc_id": "CS201",
+      "chunk_index": 14,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.1: Trừu tượng hóa > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.2: Quan hệ giữa các đối tượng > Mục tiêu\nPhân biệt liên kết, kết tập và hợp thành ở mức khái niệm.",
+      "chunk_id": "CS201_15",
+      "doc_id": "CS201",
+      "chunk_index": 15,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.2: Quan hệ giữa các đối tượng > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.2: Quan hệ giữa các đối tượng > Nội dung\nLiên kết mô tả việc các đối tượng có quan hệ hoặc tương tác. Kết tập thể hiện quan hệ toàn thể–thành phần mà thành phần có thể tồn tại độc lập. Hợp thành thể hiện quan hệ sở hữu chặt hơn, trong đó vòng đời thành phần thường gắn với toàn thể theo mô hình thiết kế.",
+      "chunk_id": "CS201_16",
+      "doc_id": "CS201",
+      "chunk_index": 16,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 4: Trừu tượng hóa và thiết kế lớp > Bài 4.2: Quan hệ giữa các đối tượng > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.1: Xử lý ngoại lệ > Mục tiêu\nSử dụng cấu trúc xử lý lỗi để tránh chương trình kết thúc ngoài dự kiến khi có lỗi có thể dự đoán.",
+      "chunk_id": "CS201_17",
+      "doc_id": "CS201",
+      "chunk_index": 17,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.1: Xử lý ngoại lệ > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.1: Xử lý ngoại lệ > Nội dung\nTrong Python, `try` và `except` cho phép xử lý một số ngoại lệ. Nên bắt loại ngoại lệ phù hợp, không che giấu lỗi bằng cách bắt mọi ngoại lệ mà không ghi nhận hoặc xử lý.",
+      "chunk_id": "CS201_18",
+      "doc_id": "CS201",
+      "chunk_index": 18,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.1: Xử lý ngoại lệ > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.2: Kiểm thử lớp > Mục tiêu\nThiết kế ca kiểm thử cho thuộc tính và phương thức.",
+      "chunk_id": "CS201_19",
+      "doc_id": "CS201",
+      "chunk_index": 19,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.2: Kiểm thử lớp > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.2: Kiểm thử lớp > Nội dung\nKiểm thử lớp nên xem xét trạng thái khởi tạo, lời gọi phương thức hợp lệ, dữ liệu biên và hành vi khi nhận đầu vào không hợp lệ. Có thể kiểm thử từng lớp độc lập trước khi kiểm thử các lớp tương tác với nhau.",
+      "chunk_id": "CS201_20",
+      "doc_id": "CS201",
+      "chunk_index": 20,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 5: Ngoại lệ và kiểm thử > Bài 5.2: Kiểm thử lớp > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 6: Ôn tập và bài tập tổng hợp > Bài 6.1: Thiết kế chương trình nhỏ > Nội dung\nMột bài tập tổng hợp có thể mô hình hóa hệ thống quản lý sinh viên với các lớp `Student`, `Course` và `Enrollment`. Cần xác định trách nhiệm của từng lớp, dữ liệu cần lưu và các phương thức để đăng ký hoặc hủy đăng ký học phần.",
+      "chunk_id": "CS201_21",
+      "doc_id": "CS201",
+      "chunk_index": 21,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 6: Ôn tập và bài tập tổng hợp > Bài 6.1: Thiết kế chương trình nhỏ > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Lập trình hướng đối tượng (CS201) > Tuần 6: Ôn tập và bài tập tổng hợp > Bài 6.2: Ôn tập > Nội dung\nNội dung ôn tập gồm lớp, đối tượng, thuộc tính, phương thức, đóng gói, kế thừa, đa hình, trừu tượng hóa, quan hệ giữa đối tượng, ngoại lệ và kiểm thử.",
+      "chunk_id": "CS201_22",
+      "doc_id": "CS201",
+      "chunk_index": 22,
+      "metadata": {
+        "title": "Lập trình hướng đối tượng",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS201_object_oriented_programming.md",
+        "heading_path": "Lập trình hướng đối tượng (CS201) > Tuần 6: Ôn tập và bài tập tổng hợp > Bài 6.2: Ôn tập > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301)\nTài liệu mẫu giới thiệu các khái niệm nền tảng về mô hình dữ liệu quan hệ và SQL. Các ví dụ truy vấn dùng cú pháp SQL phổ biến; một số chi tiết có thể khác nhau giữa các hệ quản trị cơ sở dữ liệu.",
+      "chunk_id": "CS301_0",
+      "doc_id": "CS301",
+      "chunk_index": 0,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301)",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.1: Cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu > Mục tiêu\nPhân biệt cơ sở dữ liệu với hệ quản trị cơ sở dữ liệu (DBMS).",
+      "chunk_id": "CS301_1",
+      "doc_id": "CS301",
+      "chunk_index": 1,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.1: Cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.1: Cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu > Nội dung\nCơ sở dữ liệu là tập hợp dữ liệu được tổ chức để lưu trữ và truy xuất. DBMS là phần mềm hỗ trợ định nghĩa, truy vấn, cập nhật và quản lý quyền truy cập dữ liệu.",
+      "chunk_id": "CS301_2",
+      "doc_id": "CS301",
+      "chunk_index": 2,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.1: Cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.2: Mô hình quan hệ > Mục tiêu\nNhận biết bảng, hàng, cột và miền giá trị.",
+      "chunk_id": "CS301_3",
+      "doc_id": "CS301",
+      "chunk_index": 3,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.2: Mô hình quan hệ > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.2: Mô hình quan hệ > Nội dung\nTrong mô hình quan hệ, bảng biểu diễn một quan hệ, hàng biểu diễn bản ghi và cột biểu diễn thuộc tính. Mỗi cột có miền giá trị được xác định theo kiểu dữ liệu hoặc quy tắc của hệ thống.",
+      "chunk_id": "CS301_4",
+      "doc_id": "CS301",
+      "chunk_index": 4,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 1: Khái niệm cơ sở dữ liệu > Bài 1.2: Mô hình quan hệ > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.1: Khóa chính và khóa ngoại > Mục tiêu\nGiải thích được cách khóa xác định bản ghi và biểu diễn quan hệ giữa bảng.",
+      "chunk_id": "CS301_5",
+      "doc_id": "CS301",
+      "chunk_index": 5,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.1: Khóa chính và khóa ngoại > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.1: Khóa chính và khóa ngoại > Nội dung\nKhóa chính (PRIMARY KEY) xác định duy nhất mỗi hàng và không được chứa giá trị NULL. Khóa ngoại (FOREIGN KEY) tham chiếu khóa được chỉ định ở bảng khác hoặc trong cùng bảng, nhằm duy trì toàn vẹn tham chiếu theo các ràng buộc đã khai báo.",
+      "chunk_id": "CS301_6",
+      "doc_id": "CS301",
+      "chunk_index": 6,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.1: Khóa chính và khóa ngoại > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.2: Ràng buộc dữ liệu > Mục tiêu\nNhận biết các ràng buộc phổ biến.",
+      "chunk_id": "CS301_7",
+      "doc_id": "CS301",
+      "chunk_index": 7,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.2: Ràng buộc dữ liệu > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.2: Ràng buộc dữ liệu > Nội dung\nCác ràng buộc thường gặp gồm `NOT NULL`, `UNIQUE`, `CHECK`, `PRIMARY KEY` và `FOREIGN KEY`. Ràng buộc giúp DBMS từ chối những thao tác vi phạm quy tắc dữ liệu đã định nghĩa.",
+      "chunk_id": "CS301_8",
+      "doc_id": "CS301",
+      "chunk_index": 8,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 2: Khóa và ràng buộc > Bài 2.2: Ràng buộc dữ liệu > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.1: SELECT, WHERE và ORDER BY > Mục tiêu\nViết truy vấn lọc và sắp xếp dữ liệu.",
+      "chunk_id": "CS301_9",
+      "doc_id": "CS301",
+      "chunk_index": 9,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.1: SELECT, WHERE và ORDER BY > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.1: SELECT, WHERE và ORDER BY > Nội dung\n`SELECT` chỉ định các cột cần trả về; `FROM` chỉ định bảng; `WHERE` lọc hàng theo điều kiện; `ORDER BY` sắp xếp kết quả.\n\n```sql\nSELECT student_id, full_name\nFROM Student\nWHERE major = 'CS'\nORDER BY full_name;\n```",
+      "chunk_id": "CS301_10",
+      "doc_id": "CS301",
+      "chunk_index": 10,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.1: SELECT, WHERE và ORDER BY > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.2: Hàm tổng hợp và GROUP BY > Mục tiêu\nTính toán thống kê trên các nhóm bản ghi.",
+      "chunk_id": "CS301_11",
+      "doc_id": "CS301",
+      "chunk_index": 11,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.2: Hàm tổng hợp và GROUP BY > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.2: Hàm tổng hợp và GROUP BY > Nội dung\nCác hàm tổng hợp thường dùng gồm `COUNT`, `SUM`, `AVG`, `MIN` và `MAX`. `GROUP BY` gom các hàng theo một hoặc nhiều cột; `HAVING` lọc các nhóm sau khi tổng hợp.\n\n```sql\nSELECT major, COUNT(*) AS student_count\nFROM Student\nGROUP BY major;\n```",
+      "chunk_id": "CS301_12",
+      "doc_id": "CS301",
+      "chunk_index": 12,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 3: Truy vấn SQL cơ bản > Bài 3.2: Hàm tổng hợp và GROUP BY > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.1: JOIN > Mục tiêu\nKết hợp dữ liệu từ nhiều bảng dựa trên điều kiện liên kết.",
+      "chunk_id": "CS301_13",
+      "doc_id": "CS301",
+      "chunk_index": 13,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.1: JOIN > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.1: JOIN > Nội dung\n`INNER JOIN` trả về các hàng thỏa điều kiện nối. `LEFT JOIN` giữ tất cả hàng từ bảng bên trái và ghép dữ liệu phù hợp từ bảng bên phải; nếu không có hàng phù hợp, các cột bên phải có thể là NULL.\n\n```sql\nSELECT s.full_name, e.course_id\nFROM Student AS s\nINNER JOIN Enrollment AS e\n    ON s.student_id = e.student_id;\n```",
+      "chunk_id": "CS301_14",
+      "doc_id": "CS301",
+      "chunk_index": 14,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.1: JOIN > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.2: Truy vấn con > Mục tiêu\nSử dụng truy vấn bên trong một truy vấn khác.",
+      "chunk_id": "CS301_15",
+      "doc_id": "CS301",
+      "chunk_index": 15,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.2: Truy vấn con > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.2: Truy vấn con > Nội dung\nTruy vấn con có thể xuất hiện trong `WHERE`, `FROM` hoặc danh sách `SELECT`, tùy loại truy vấn và hệ quản trị. Khi có thể, nên đặt bí danh rõ ràng và kiểm tra truy vấn trả về một giá trị hay nhiều hàng.",
+      "chunk_id": "CS301_16",
+      "doc_id": "CS301",
+      "chunk_index": 16,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 4: Kết nối bảng và truy vấn con > Bài 4.2: Truy vấn con > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.1: Phụ thuộc hàm > Mục tiêu\nHiểu khái niệm phụ thuộc hàm ở mức cơ bản.",
+      "chunk_id": "CS301_17",
+      "doc_id": "CS301",
+      "chunk_index": 17,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.1: Phụ thuộc hàm > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.1: Phụ thuộc hàm > Nội dung\nPhụ thuộc hàm X → Y có nghĩa là trong quan hệ đang xét, giá trị X xác định duy nhất giá trị Y. Phân tích phụ thuộc hàm hỗ trợ xác định khóa và đánh giá thiết kế bảng.",
+      "chunk_id": "CS301_18",
+      "doc_id": "CS301",
+      "chunk_index": 18,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.1: Phụ thuộc hàm > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.2: Chuẩn hóa > Mục tiêu\nGiải thích lý do chuẩn hóa bảng dữ liệu.",
+      "chunk_id": "CS301_19",
+      "doc_id": "CS301",
+      "chunk_index": 19,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.2: Chuẩn hóa > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.2: Chuẩn hóa > Nội dung\nChuẩn hóa giúp giảm dư thừa và hạn chế bất thường khi thêm, sửa hoặc xóa dữ liệu. Dạng chuẩn 1NF yêu cầu các thuộc tính có giá trị nguyên tố theo mô hình quan hệ; 2NF loại bỏ phụ thuộc bộ phận của thuộc tính không khóa vào một phần khóa ghép; 3NF xử lý một số dạng phụ thuộc bắc cầu theo điều kiện xác định của dạng chuẩn.",
+      "chunk_id": "CS301_20",
+      "doc_id": "CS301",
+      "chunk_index": 20,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 5: Thiết kế và chuẩn hóa > Bài 5.2: Chuẩn hóa > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.1: Giao dịch và ACID > Mục tiêu\nNêu được bốn thuộc tính ACID.",
+      "chunk_id": "CS301_21",
+      "doc_id": "CS301",
+      "chunk_index": 21,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.1: Giao dịch và ACID > Mục tiêu",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.1: Giao dịch và ACID > Nội dung\nAtomicity (tính nguyên tử) yêu cầu giao dịch được thực hiện toàn bộ hoặc không thực hiện. Consistency (tính nhất quán) yêu cầu giao dịch bảo toàn các ràng buộc. Isolation (tính cô lập) điều chỉnh mức độ ảnh hưởng lẫn nhau giữa các giao dịch đồng thời. Durability (tính bền vững) yêu cầu thay đổi đã xác nhận được duy trì theo bảo đảm của hệ thống.",
+      "chunk_id": "CS301_22",
+      "doc_id": "CS301",
+      "chunk_index": 22,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.1: Giao dịch và ACID > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
+    {
+      "content": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.2: Ôn tập và kiểm thử truy vấn > Nội dung\nKhi kiểm thử truy vấn, cần xem xét bảng rỗng, giá trị NULL, bản ghi trùng, trường hợp không có kết quả và dữ liệu có quan hệ khóa ngoại. Cần đọc kết quả thực tế và xác minh rằng truy vấn đáp ứng đúng yêu cầu nghiệp vụ.",
+      "chunk_id": "CS301_23",
+      "doc_id": "CS301",
+      "chunk_index": 23,
+      "metadata": {
+        "title": "Cơ sở dữ liệu",
+        "version": "2026-10-13",
+        "owner": "Bộ môn Khoa học máy tính",
+        "source": "data/documents/CS301_database_systems.md",
+        "heading_path": "Cơ sở dữ liệu (CS301) > Tuần 6: Giao dịch và ôn tập > Bài 6.2: Ôn tập và kiểm thử truy vấn > Nội dung",
+        "strategy": "recursive_sentence_aware",
+        "chunk_size": 700
+      },
+      "embedding": null
+    },
     {
       "content": "Week 1 — Lecture Notes (Instructor Guide) > Python Data Structures for AI\n> **Course:** AI Programming with Python\n> **Week:** 1 of 8 — 2 sessions/week × 4 hours (2h theory + 2h lab per session; theory total 4h/week)\n> **Prerequisites:** Python basics (variables, functions, loops, conditionals, file I/O); OOP in C++\n> **Learning Objectives:**\n> - A1.1 Select the appropriate data type (`list`, `tuple`, `dict`, `set`) for a given AI data-processing task and justify the choice.\n> - A1.2 Read and write JSON data using Python's `json` module, including custom object serialisation.\n> - A1.3 Define a `@dataclass` with type hints and default values to model structured AI data.\n> - A1.4 Transform a list of `@dataclass` instances into a JSON-serialisable dictionary.\n\n---",
       "chunk_id": "AIPY_W1_0",
