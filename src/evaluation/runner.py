@@ -59,7 +59,7 @@ def run_evaluation() -> None:
         result = search_lessons(
             context=context,
             query=case["question"],
-            top_k=case["top_k"],
+            top_k=case.get("top_k", 3),
             mode="hybrid",
         )
 
@@ -73,8 +73,8 @@ def run_evaluation() -> None:
         actual_answers.append(actual_answer)
 
         # Chỉ đánh giá nguồn đối với test case có nguồn mong đợi
-        if case["expected_sources"]:
-            expected_sources.append(case["expected_sources"])
+        if case.get("expected_sources", []):
+            expected_sources.append(case.get("expected_sources", []))
             retrieved_sources.append(retrieved_sources_for_case)
             source_matches.append(case["source_match"])
 
@@ -86,7 +86,7 @@ def run_evaluation() -> None:
             "actual_answer": actual_answer,
             "action": result["action"],
             "status": "ok" if actual_answer else "no_answer",
-            "expected_sources": case["expected_sources"],
+            "expected_sources": case.get("expected_sources", []),
             "retrieved_sources": retrieved_sources_for_case,
             "error": result["error"],
         }
@@ -99,7 +99,7 @@ def run_evaluation() -> None:
         print(f"Expected answer: {case['expect_answer']}")
         print(f"Actual answer: {actual_answer}")
         print(f"Status: {case_result['status']}")
-        print(f"Expected sources: {case['expected_sources']}")
+        print(f"Expected sources: {case.get('expected_sources', [])}")
         print(f"Retrieved sources: {retrieved_sources_for_case}")
 
         if result["error"]:
