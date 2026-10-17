@@ -70,5 +70,13 @@
     "request_content": "Sinh viên gặp khó khăn khi làm bài tập Session 2: chưa hiểu cách xử lý stream response token-by-token và cách ghép các delta lại thành văn bản hoàn chỉnh (full_response). Cụ thể, code bị lỗi khi delta.content trả về giá trị None ở chunk cuối cùng. Nhờ trợ giảng hướng dẫn và giải đáp phần này.",
     "created_at": "2026-10-16T21:41:55",
     "status": "pending"
+  },
+  {
+    "request_id": "REQ0010",
+    "student_id": "24110115",
+    "course_id": "CA101",
+    "request_content": "Xin tài liệu ôn tập giữa kỳ",
+    "created_at": "2026-10-17T17:26:02",
+    "status": "pending"
   }
 ]
