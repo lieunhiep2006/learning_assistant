@@ -2,6 +2,8 @@
 
 setup:
 	@echo "=== [1/2] Cài đặt môi trường và dependencies từ pyproject.toml ==="
+	uv venv
+	uv sync
 	uv pip install -e . || pip install -e .
 	@echo "=== Cài đặt hoàn tất! ==="
 
